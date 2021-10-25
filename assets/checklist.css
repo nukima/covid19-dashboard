@@ -1,0 +1,13 @@
+.my_box_container {
+  display: flex;
+}
+
+.my_box_input {
+  cursor: pointer;
+}
+
+.my_box_label {
+  background: #eeabf3;
+  padding: 1rem;
+  border-radius: 2rem;
+}
