@@ -30,7 +30,7 @@ layout=html.Div([
     dash_table.DataTable(
         id='datatable-vietnam',
         columns=[
-            {'name': i, 'id': i, 'deletable': True} for i in df.columns
+            {'name': i, 'id': i, 'deletable': False} for i in df.columns
             # omit the id column
             if i != 'id' and i!="index"
         ],
@@ -40,7 +40,7 @@ layout=html.Div([
         sort_action="native",
         sort_mode='multi',
         row_selectable='multi',
-        row_deletable=True,
+        row_deletable=False,
         selected_rows=[],
         page_action='native',
         page_current= 0,

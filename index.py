@@ -8,7 +8,7 @@ from app import app
 from app import server
 
 # Connect to app pages
-from apps import world, vietnam, map
+from apps import world, vietnam, map, map_world,map_vn
 
 
 # first section layout

@@ -14,7 +14,7 @@ from app import app
 df=pd.read_csv('https://raw.githubusercontent.com/owid/covid-19-data/master/public/data/latest/owid-covid-latest.csv')
 dff=df[['iso_code','location','total_cases','people_fully_vaccinated_per_hundred']].copy().sort_values(by=['total_cases'],ascending=False)
 dff.reset_index(inplace=True)
-dff=dff.rename(columns = {'iso_code':'id','people_fully_vaccinated_per_hundred':'Vaccinated rate','total_cases':'Cases'}, inplace = False)
+dff=dff.rename(columns = {'iso_code':'id','location':'Quốc gia','people_fully_vaccinated_per_hundred':'Tỉ lệ tiên vắc-xin','total_cases':'Số ca'}, inplace = False)
 dff.set_index('id', inplace=True, drop=False)
 totaldf=dff.loc[dff['id'].str.startswith('OWID')]
 dff = dff.drop(dff.loc[dff['id'].str.startswith('OWID')].index)
@@ -80,14 +80,32 @@ def map_world(dff2):
 
 
     fig=px.choropleth(data_frame=dff2,locations='id',locationmode='ISO-3',
-                        color='Cases',
-                        hover_data=['location','Cases','Vaccinated rate'],
+                        color='Số ca',
+                        hover_data=['Quốc gia','Số ca','Tỉ lệ tiên vắc-xin'],
                         color_continuous_scale="mint",
                         color_continuous_midpoint=1000000,
                         range_color=[0,50000000],
                         labels={'WORLD COVID-19 CASES MAP'},
                         template='plotly')
     return fig
+
+#datatable highlight selected_row
+@app.callback(
+    Output('datatable-world', 'style_data_conditional'),
+    [Input('datatable-world', 'derived_viewport_selected_rows'),]
+)
+def highlight_selectedRow(chosen_rows):
+    style_data_conditional=[
+                {
+                    'if': {'row_index': 'odd'},
+                    'backgroundColor': 'rgb(220, 220, 220)',
+                },
+                {
+                    'if': {'row_index': chosen_rows},
+                    'backgroundColor': '#D4F0F0'
+                },
+            ]
+    return style_data_conditional
 
 
 # -------------------------------

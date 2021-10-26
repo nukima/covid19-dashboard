@@ -9,7 +9,7 @@ from app import app
 from apps import map_world
 from apps import map_vn
 layout=html.Div([
-    dcc.RadioItems(
+    html.Div([dcc.RadioItems(
         id='user-choice',
         options=[
             {'label': 'Thế Giới', 'value': 'world'},
@@ -17,7 +17,7 @@ layout=html.Div([
         ],
         value='world',
         labelStyle={'display': 'inline-block'}
-    ),
+    )]),
     html.Div(id='page_content', children=[])
 ])
 
@@ -29,6 +29,6 @@ layout=html.Div([
 )
 def update_content(choice):
     if(choice=='world'):
-        return map_world.layout
+        return [map_world.layout]
     elif(choice=='vn'):
-        return map_vn.layout
+        return [map_vn.layout]
