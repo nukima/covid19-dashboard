@@ -8,7 +8,7 @@ from app import app
 from app import server
 
 # Connect to app pages
-from apps import world, vietnam, map, map_world,map_vn
+from apps import world, vietnam, maps
 
 
 # first section layout
@@ -36,7 +36,7 @@ def display_page(pathname):
     if pathname == '/apps/vietnam':
         return vietnam.layout
     if pathname == '/':
-        return map.layout
+        return maps.layout
     else:
         return "404 Page Error! Please choose a link"
 

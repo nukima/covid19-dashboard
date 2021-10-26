@@ -2,12 +2,11 @@ import dash
 from dash import dcc  # create interactive components
 from dash import html  # access html tags
 from dash.dependencies import Input, Output
-
+#map
+import map_vn, map_world
 #app
 from app import app
-#map
-from apps import map_world
-from apps import map_vn
+
 layout=html.Div([
     html.Div([dcc.RadioItems(
         id='user-choice',
@@ -29,6 +28,6 @@ layout=html.Div([
 )
 def update_content(choice):
     if(choice=='world'):
-        return [map_world.layout]
+        return map_world.layout
     elif(choice=='vn'):
-        return [map_vn.layout]
+        return map_vn.layout
