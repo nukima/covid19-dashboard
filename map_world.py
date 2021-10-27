@@ -5,19 +5,13 @@ from dash import dash_table
 from dash import dcc  # create interactive components
 from dash import html  # access html tags
 from dash.dependencies import Input, Output
-
+from get_covid_data import map_world_data
 #app
 from app import app
 
 # -----------------
 #Handle the data
-df=pd.read_csv('https://raw.githubusercontent.com/owid/covid-19-data/master/public/data/latest/owid-covid-latest.csv')
-dff=df[['iso_code','location','total_cases','people_fully_vaccinated_per_hundred']].copy().sort_values(by=['total_cases'],ascending=False)
-dff.reset_index(inplace=True)
-dff=dff.rename(columns = {'iso_code':'id','location':'Quốc gia','people_fully_vaccinated_per_hundred':'Tỉ lệ tiên vắc-xin','total_cases':'Số ca'}, inplace = False)
-dff.set_index('id', inplace=True, drop=False)
-totaldf=dff.loc[dff['id'].str.startswith('OWID')]
-dff = dff.drop(dff.loc[dff['id'].str.startswith('OWID')].index)
+dff=map_world_data()
 # -----------------
 
 
