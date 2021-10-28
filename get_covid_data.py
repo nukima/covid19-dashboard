@@ -3,7 +3,7 @@ from numpy import NaN
 import pandas as pd
 import requests
 from bs4 import BeautifulSoup
-
+import io
 
 def get_world_covid_data():
     """
@@ -104,10 +104,47 @@ def get_vaccine_data_vietnam():
 
     return df
 
+def get_vietnam_covid_19_time_series():
+    '''
+        Return a dataframe. Confirmed and Deaths of Vietnam from 22/1/2020
+        Source: "https://github.com/CSSEGISandData/COVID-19"
+    '''
+    # confirmed 
+    response = requests.get(
+    "https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_confirmed_global.csv")
+    data_text = response.text
+    buf = io.StringIO(data_text)
+    df = pd.read_csv(buf, delimiter=",")
+    time_series_confirmed_vn = df.iloc[274][4:]
+    #deaths
+    response = requests.get(
+    "https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_deaths_global.csv")
+    data_text = response.text
+    buf = io.StringIO(data_text)
+    df = pd.read_csv(buf, delimiter=",")
+    time_series_deaths_vn = df.iloc[274][4:]
+    response = requests.get(
+    "https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_recovered_global.csv")
+    data_text = response.text
+    buf = io.StringIO(data_text)
+    df = pd.read_csv(buf, delimiter=",")
+    time_series_recovered_vn = df.iloc[259][4:]
+    #merge two series
 
-def main():
-    return
+    time_series_vn = pd.DataFrame(data=[], index=[])
+    date = pd.Series(time_series_confirmed_vn.index, name='Ngày')
+    date = pd.to_datetime(date)
+    time_series_vn['Ngày'] = date.array
+    time_series_vn['Số ca nhiễm'] = time_series_confirmed_vn.array
+    time_series_vn['Tử vong'] = time_series_deaths_vn.array
+    time_series_vn['Khỏi'] = time_series_recovered_vn.array
+
+    time_series_vn = time_series_vn.melt(id_vars=['Ngày'], value_vars=[
+        'Số ca nhiễm', 'Tử vong', 'Khỏi'], var_name='Chú thích', value_name='Số ca')
+        
+    return time_series_vn
+
 
 
 if __name__ == "__main__":
-    main()
+    msg = 'hello'

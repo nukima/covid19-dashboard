@@ -15,7 +15,6 @@ from app import app
 
 # -----------------
 # Get data
-today, total_data_df, today_data_df, overview_7days_df, city_data_df = get_vietnam_covid_data()
 world_data = get_world_covid_data()
 # ---------------------
 
@@ -107,7 +106,7 @@ layout = html.Div([
                          value='total_cases_per_million',
                          multi=False,
                          clearable=False
-                         ),
+            ),
             dcc.Graph(id='barchart-s2'),
             html.Div(id='piechart-s2'),
         ]),
@@ -140,14 +139,17 @@ def update_datatable(continent_selected):
         Output('barchart-s2', 'figure')
     ],
     [   Input('continent-checklist', 'value'), 
+        Input('datatable-s2', 'derived_virtual_data'),
         Input('bar-dropdown-s2', 'value'),
         Input('datatable-s2', 'derived_virtual_selected_rows'),
     ]
 )
-def update_barchart(continent_selected, barchart_xaxis, slctd_row_indices,):
+def update_barchart(continent_selected, all_rows_data, barchart_xaxis, slctd_row_indices,):
     if not continent_selected:
         continent_selected = ['Oceania']
-    barchart_data = world_data[world_data['continent'].isin(continent_selected)]
+    df_table = pd.DataFrame(all_rows_data)
+    country_list = df_table['location']
+    barchart_data = world_data[world_data['location'].isin(country_list)]
     barchart_data.index = [i for i in range(len(barchart_data))]
     barchart = px.bar(
         data_frame=barchart_data,
@@ -167,7 +169,7 @@ def update_barchart(continent_selected, barchart_xaxis, slctd_row_indices,):
         barchart.update_traces(marker_color=colors)
 
     return (barchart, )
-#datatable highlight selected_row -> barchart highlight -> piechart country
+#datatable highlight selected_row -> piechart country
 @app.callback(
     [   Output('datatable-s2', 'style_data_conditional'), 
         Output('piechart-s2', 'children'),
