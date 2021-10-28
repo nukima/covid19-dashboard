@@ -141,7 +141,7 @@ def get_vietnam_covid_19_time_series():
 
     time_series_vn = time_series_vn.melt(id_vars=['Ngày'], value_vars=[
         'Số ca nhiễm', 'Tử vong', 'Khỏi'], var_name='Chú thích', value_name='Số ca')
-        
+
     return time_series_vn
 
 

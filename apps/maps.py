@@ -23,8 +23,8 @@ layout=html.Div([
 # -----------------
 #Radio button => map
 @app.callback(
-    [Output('page_content','children')],
-    [Input('user-choice','value')] 
+    Output('page_content','children'),
+    Input('user-choice','value') 
 )
 def update_content(choice):
     if(choice=='world'):
