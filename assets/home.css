@@ -1,0 +1,58 @@
+#home-content > div > :nth-child(2) {
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
+}
+#datatable-world .cell-table,
+#datatable-vietnam  .cell-table {
+    font-family: 'Roboto', sans-serif;
+    box-sizing: border-box;
+    padding: 10px;
+    border: 1px solid black ;
+   
+}
+#datatable-world .cell-table > tbody > tr > *,
+#datatable-vietnam .cell-table > tbody > tr > * {
+    transition: all 0.3s ease;
+}
+#datatable-world .cell-table > tbody > tr:hover > *,
+#datatable-vietnam .cell-table > tbody > tr:hover > * {
+    background-color: rgb(68, 68, 68);
+    color: white;
+}
+#datatable-world .cell-table > tbody > :nth-child(1):hover > *,
+#datatable-world .cell-table > tbody > :nth-child(2):hover > *,
+#datatable-vietnam .cell-table > tbody > :nth-child(1):hover > *,
+#datatable-vietnam .cell-table > tbody > :nth-child(2):hover > *   {
+    background-color: rgb(255, 255, 255);
+    color: rgb(0, 0, 0);
+}
+#datatable-world .cell-table > tbody > tr > th,
+#datatable-vietnam .cell-table > tbody > tr > th{
+    cursor: pointer;
+    text-align: center;
+}
+#datatable-world .cell-table > tbody > tr > td,
+#datatable-vietnam .cell-table > tbody > tr > td {
+    cursor: pointer;
+    text-align: center;
+}
+#datatable-world .cell-table > tbody > tr > :nth-child(3) {
+    color: red;
+}
+#datatable-world .cell-table > tbody > :nth-child(1) > :nth-child(3) {
+    color: black;
+}
+#home-content {
+    width: calc(100vw - 15px);
+    
+}
+#home-content > div {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+#home-content  {
+    opacity: 0;
+    animation: home_ani 2.5s forwards;
+}

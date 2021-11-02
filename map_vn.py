@@ -1,7 +1,5 @@
 import pandas as pd  # organize the data
 import plotly.express as px
-import requests
-import dash
 from dash import dash_table
 from dash import dcc  # create interactive components
 from dash import html  # access html tags
@@ -27,26 +25,35 @@ layout=html.Div([
             if i != 'id' and i!="index"
         ],
         data=df.to_dict('records'),
-        editable=False,
-        filter_action="native",
+        style_data_conditional=[                
+            {
+                "if": {"state": "selected"},
+                "backgroundColor": "inherit !important",
+                "border": "inherit !important",
+            }],  
+        # editable=False,
+        # filter_action="native",
         sort_action="native",
         sort_mode='multi',
         row_selectable='multi',
         row_deletable=False,
-        selected_rows=[],
-        page_action='native',
-        page_current= 0,
-        page_size= 10,
+        # selected_rows=[],
+        # page_action='native',
+        # page_current= 0,
+        # page_size= 10,
+        style_table={'height': '600px', 'overflowY': 'auto', "width": "400px"},
         style_header={
-                        'backgroundColor': '#CCE2CB',
-                        'fontWeight': 'bold'
-            },
-        style_data_conditional=[
-                {
-                    'if': {'row_index': 'odd'},
-                    'backgroundColor': 'rgb(220, 220, 220)',
-                }
-            ],
+                        # 'backgroundColor': '#CCE2CB',
+                        'fontWeight': 'bold',
+                        'fontSize'  : '18px'
+                    },
+         style_as_list_view=True,
+        # style_data_conditional=[
+        #         {
+        #             # 'if': {'row_index': 'odd'},
+        #             'backgroundColor': 'rgb(220, 220, 220)',
+        #         }
+        #     ],
     ),
 ])
 
@@ -73,6 +80,7 @@ def map_vietnam(dff2):
                         color='Số ca',
                         hover_data=['Số ca'],
                         color_continuous_scale="mint",
+                        # color_discrete_sequence=["green", "red"],
                         scope="asia",
                         labels={'VIETNAM COVID-19 CASES MAP'},
                         template='plotly')
@@ -81,22 +89,19 @@ def map_vietnam(dff2):
     return fig
 
 #datatable highlight selected_row
-@app.callback(
-    Output('datatable-vietnam', 'style_data_conditional'),
-    [Input('datatable-vietnam', 'derived_viewport_selected_rows'),]
-)
-def highlight_selectedRow(chosen_rows):
-    style_data_conditional=[
-                {
-                    'if': {'row_index': 'odd'},
-                    'backgroundColor': 'rgb(220, 220, 220)',
-                },
-                {
-                    'if': {'row_index': chosen_rows},
-                    'backgroundColor': '#D4F0F0'
-                },
-            ]
-    return style_data_conditional
-
-if __name__ == '__main__':
-    app.run_server(debug=True)
+# @app.callback(
+#     Output('datatable-vietnam', 'style_data_conditional'),
+#     [Input('datatable-vietnam', 'derived_viewport_selected_rows'),]
+# )
+# def highlight_selectedRow(chosen_rows):
+#     style_data_conditional=[
+#                 {
+#                     'if': {'row_index': 'odd'},
+#                     'backgroundColor': 'rgb(220, 220, 220)',
+#                 },
+#                 {
+#                     'if': {'row_index': chosen_rows},
+#                     'backgroundColor': '#D4F0F0'
+#                 },
+#             ]
+#     return style_data_conditional

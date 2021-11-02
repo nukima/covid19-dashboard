@@ -1,0 +1,85 @@
+#world-page{
+    opacity: 0;
+    animation: home_ani 0.5s forwards;
+}
+#world-page > :nth-child(2){
+    font-family: 'Roboto', sans-serif;
+    max-width: 800px;
+    /* margin: auto; */
+    max-height: 500px;
+    margin: 40px auto;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
+}
+#datatable-s2 > :nth-child(2) > div > :nth-child(1) > :nth-child(2) > table > tbody > :nth-child(1) > th {
+    text-align: center;
+    background-color: black;
+    color: white;
+    font-weight: 600;
+}
+#datatable-s2 > :nth-child(2) > div > :nth-child(2) > :nth-child(2) > table > tbody > tr > td {
+    text-align: center;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+#datatable-s2 > :nth-child(2) > div > :nth-child(2) > :nth-child(2) > table > tbody > tr:hover > td {
+    background-color: rgb(65, 65, 65);
+    cursor: pointer;
+    color: white;
+}
+
+#chart-box {
+    width: calc(100vw - 30px);
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+#chart-box > div {
+    margin: 40px 40px;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
+}
+#chart-box > :nth-child(2) {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-transform: uppercase;
+    justify-items: center;
+    
+}
+#chart-box > :nth-child(2) > p {
+    width: 200px;
+    display: inline;
+    font-size: 30px;
+    text-align: center;
+    font-weight: 600;
+}
+
+
+#bar-dropdown-s2{
+    position: relative;
+    max-width: 700px;
+    font-weight: 600;
+    left: 50px;
+}
+#check-list-bar > div {
+    width: 1005;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+#check-list-bar > div > label {
+    font-size: 30px;
+    padding: 30px;
+}
+input[type="checkbox"] {
+	appearance: none;
+	width: 20px;
+	height: 20px;
+	border: 2px solid #555555;
+	background-clip: content-box;
+	padding: 3px;
+}
+
+input[type="checkbox"]:checked {
+	background-color: #555555;
+}
