@@ -71,6 +71,7 @@ layout = html.Div([
                 sort_mode="single",
                 row_selectable="single",
                 row_deletable=False,
+                style_table={'height': '350px'},
                 # page_action="native",
                 # page_current=0,
                 # page_size=7,
