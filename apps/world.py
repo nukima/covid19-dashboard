@@ -21,7 +21,7 @@ world_data = get_world_covid_data()
 #world layout
 layout = html.Div([
     # World Section 
-    html.Div([
+    # html.Div([
         # dropdown continent
         html.Div([
             dcc.Checklist(
@@ -39,12 +39,18 @@ layout = html.Div([
                 inputClassName='my_box_input',
                 labelClassName='my_box_label'
             )
-        ]),
+        ], id= "check-list-bar"),
         # Datatable
         html.Div([
             dash_table.DataTable(
                 id='datatable-s2',
-                data=[{}],
+                style_data_conditional=[                
+                {
+                    "if": {"state": "selected"},
+                    "backgroundColor": "inherit !important",
+                    "border": "inherit !important",
+                }],  
+                # data=[{}],
                 columns=[
                     {"name": 'Châu lục', "id": 'continent',
                      "deletable": False, "selectable": False},
@@ -65,32 +71,32 @@ layout = html.Div([
                 sort_mode="single",
                 row_selectable="single",
                 row_deletable=False,
-                page_action="native",
-                page_current=0,
-                page_size=7,
+                style_table={'height': '350px'},
+                # page_action="native",
+                # page_current=0,
+                # page_size=7,
                 fixed_rows={'headers': True, 'data': 0},
                 virtualization=True,
                 # style_cell={'textAlign': 'left'},
-                style_cell_conditional=[
-                    {'if': {'column_id': 'location'},
-                     'width': '10%', 'textAlign': 'center'},
-                    {'if': {'column_id': 'continent'},
-                     'width': '5%', 'textAlign': 'center'},
-                    {'if': {'column_id': 'total_cases'},
-                     'width': '25%', 'textAlign': 'center'},
-                    {'if': {'column_id': 'total_deaths'},
-                     'width': '25%', 'textAlign': 'center'},
-                    {'if': {'column_id': 'last_updated_date'},
-                     'width': '10%', 'textAlign': 'center'},
-                    {'if': {'column_id': 'people_vaccinated'},
-                     'width': '25%', 'textAlign': 'center'},
-                ],
-                style_data_conditional=[],
-                style_header={
-                    'backgroundColor': '#CCE2CB',
-                    'color': 'black',
-                    'fontWeight': 'bold'
-                }
+                # style_cell_conditional=[
+                #     {'if': {'column_id': 'location'},
+                #      'width': '10%', 'textAlign': 'center'},
+                #     {'if': {'column_id': 'continent'},
+                #      'width': '5%', 'textAlign': 'center'},
+                #     {'if': {'column_id': 'total_cases'},
+                #      'width': '25%', 'textAlign': 'center'},
+                #     {'if': {'column_id': 'total_deaths'},
+                #      'width': '25%', 'textAlign': 'center'},
+                #     {'if': {'column_id': 'last_updated_date'},
+                #      'width': '10%', 'textAlign': 'center'},
+                #     {'if': {'column_id': 'people_vaccinated'},
+                #      'width': '25%', 'textAlign': 'center'},
+                # ],
+                # style_header={
+                #     'backgroundColor': '#CCE2CB',
+                #     'color': 'black',
+                #     'fontWeight': 'bold'
+                # }
             )
         ]),
         html.Div([
@@ -107,13 +113,16 @@ layout = html.Div([
                          multi=False,
                          clearable=False
             ),
+            html.Div([
             dcc.Graph(id='barchart-s2'),
-            html.Div(id='piechart-s2'),
+            html.Div(id='piechart-s2')], id= "chart-box")
+            # dcc.Graph(id='barchart-s2'),
+            # html.Div(id='piechart-s2'),
         ]),
 
-    ])
+    # ])
 
-], className="main")
+], className="main", id = "world-page")
 
 #-------------------
 #checklist -> datatable
@@ -161,6 +170,7 @@ def update_barchart(continent_selected, all_rows_data, barchart_xaxis, slctd_row
                 "people_vaccinated_per_hundred" : "Đã tiêm vaccine (ít nhất 1 mũi) / triệu dân",
                 "total_deaths_per_million":"Ca tử vong / triệu dân"},
         template='seaborn',
+        width= 500
     )
     barchart.update_layout(yaxis={'categoryorder':'total ascending'})
     if slctd_row_indices != None:
@@ -171,39 +181,38 @@ def update_barchart(continent_selected, all_rows_data, barchart_xaxis, slctd_row
     return (barchart, )
 #datatable highlight selected_row -> piechart country
 @app.callback(
-    [   Output('datatable-s2', 'style_data_conditional'), 
-        Output('piechart-s2', 'children'),
-    ],
-    [   Input('datatable-s2', 'derived_viewport_selected_rows'),
-        Input('datatable-s2', 'derived_virtual_data'),
+    # [   Output('datatable-s2', 'style_data_conditional'), 
+       Output('piechart-s2', 'children'),
+    # [   Input('datatable-s2', 'derived_viewport_selected_rows'),
+    [   Input('datatable-s2', 'derived_virtual_data'),
         Input('datatable-s2', 'derived_virtual_selected_rows'),
     ]
 )
-def highlight_selectedRow(chosen_rows, all_rows_data, slctd_row_indices,):
-    #highlight selected row datatable
-    if chosen_rows != None:
-        style_data_conditional=[
-                {
-                    'if': {'row_index': 'odd'},
-                    'backgroundColor': 'rgb(220, 220, 220)',
-                },
-                {
-                    'if': {'row_index': chosen_rows},
-                    'backgroundColor': '#D4F0F0'
-                },
-            ]
-    else:
-        style_data_conditional=[
-                {
-                    'if': {'row_index': 'odd'},
-                    'backgroundColor': 'rgb(220, 220, 220)',
-                },
-            ]
+def highlight_selectedRow(all_rows_data, slctd_row_indices,):
+#     #highlight selected row datatable
+    # if chosen_rows != None:
+        # style_data_conditional=[
+        #         {
+        #             'if': {'row_index': 'odd'},
+        #             'backgroundColor': 'rgb(220, 220, 220)',
+        #         },
+        #         {
+        #             'if': {'row_index': chosen_rows},
+        #             'backgroundColor': '#D4F0F0'
+        #         },
+        #     ]
+    # else:
+        # style_data_conditional=[
+        #         {
+        #             'if': {'row_index': 'odd'},
+        #             'backgroundColor': 'rgb(220, 220, 220)',
+        #         },
+        #     ]
     #---------------
     #piechart
     dff = pd.DataFrame(all_rows_data)
     if not slctd_row_indices:
-        value = "Chọn một quốc gia trên bảng"
+        value = html.P("Chọn một quốc gia trên bảng")
     else: 
     
         country_name = dff.iloc[slctd_row_indices[0]]['location']
@@ -225,9 +234,9 @@ def highlight_selectedRow(chosen_rows, all_rows_data, slctd_row_indices,):
                                     data_frame= piechart_data, names='Trạng thái', values='Số người',
                                     hole=0.3, title=f"Tình trạng tiêm vaccine ở {country_name}", template='seaborn'
                                     ),
-                    )
+                    style={'width': '500px'})
         else: value = "Chưa đủ số liệu"
 
-    return (style_data_conditional, value)
+    return value
 
 # -------------------------------

@@ -13,15 +13,16 @@ from apps import world, vietnam, maps
 
 # first section layout
 app.layout = html.Div([
+    html.H1("Covid19 Thông Tin" , id = "title"),
     dcc.Location(id='url', refresh=False),
     html.Div([
-        dcc.Link('Home |', href='/',
+        dcc.Link('Home', href='/',
                  style={'font-weight': 'bold'}),
-        dcc.Link(' World |', href='/apps/world',
+        dcc.Link('World', href='/apps/world',
                  style={'font-weight': 'bold'}),
-        dcc.Link(' Vietnam', href='/apps/vietnam',
+        dcc.Link('Việt Nam', href='/apps/vietnam',
                  style={'font-weight': 'bold'}),
-    ], className="row"),
+    ], className="row", id = "menu"),
     html.Div(id='page-content', children=[])
 ])
 
@@ -42,4 +43,4 @@ def display_page(pathname):
 
 
 if __name__ == '__main__':
-    app.run_server(debug=True)
+    app.run_server()

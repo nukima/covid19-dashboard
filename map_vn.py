@@ -1,7 +1,5 @@
 import pandas as pd  # organize the data
 import plotly.express as px
-import requests
-import dash
 from dash import dash_table
 from dash import dcc  # create interactive components
 from dash import html  # access html tags
@@ -15,7 +13,7 @@ from app import app
 # -----------------
 #Handle the data
 today, total_data_df, today_data_df, overview_7days_df, city_data_df=get_vietnam_covid_data()
-vn_location=pd.read_json("Dash/vn_location.json")
+vn_location=pd.read_json("covid19-dashboard/vn_location.json")
 df=city_data_df
 dff=pd.merge(df,vn_location)
 # print(dff)
@@ -46,26 +44,35 @@ layout=html.Div([
             if i != 'id' and i!="index"
         ],
         data=df.to_dict('records'),
-        editable=False,
-        filter_action="native",
+        style_data_conditional=[                
+            {
+                "if": {"state": "selected"},
+                "backgroundColor": "inherit !important",
+                "border": "inherit !important",
+            }],  
+        # editable=False,
+        # filter_action="native",
         sort_action="native",
         sort_mode='multi',
         row_selectable='multi',
         row_deletable=False,
-        selected_rows=[],
-        page_action='native',
-        page_current= 0,
-        page_size= 10,
+        # selected_rows=[],
+        # page_action='native',
+        # page_current= 0,
+        # page_size= 10,
+        style_table={'height': '600px', 'overflowY': 'auto', "width": "400px"},
         style_header={
-                        'backgroundColor': '#CCE2CB',
-                        'fontWeight': 'bold'
-            },
-        style_data_conditional=[
-                {
-                    'if': {'row_index': 'odd'},
-                    'backgroundColor': 'rgb(220, 220, 220)',
-                }
-            ],
+                        # 'backgroundColor': '#CCE2CB',
+                        'fontWeight': 'bold',
+                        'fontSize'  : '18px'
+                    },
+         style_as_list_view=True,
+        # style_data_conditional=[
+        #         {
+        #             # 'if': {'row_index': 'odd'},
+        #             'backgroundColor': 'rgb(220, 220, 220)',
+        #         }
+        #     ],
     ),
 ])
 
@@ -75,6 +82,7 @@ layout=html.Div([
 #     Input('datatable-vietnam', 'derived_virtual_selected_rows')]
 # )
 
+<<<<<<< HEAD
 # def update_graphs(all_rows_data, slctd_row_indices):
 #     if slctd_row_indices is None:
 #         slctd_row_indices=[]
@@ -91,24 +99,47 @@ layout=html.Div([
 #     fig.update_layout(clickmode="select")
 #     fig.update_layout(margin={"r":0,"t":0,"l":0,"b":0})
 #     return fig
+=======
+def update_graphs(all_rows_data, slctd_row_indices):
+    if slctd_row_indices is None:
+        slctd_row_indices=[]
+    dff2 = pd.DataFrame(all_rows_data)
+    borders = [5 if i in slctd_row_indices else 1
+               for i in range(len(df))]
+    if "id" in dff2:
+        return dcc.Graph(id='MVN',figure=map_vietnam(dff2).update_traces(marker_line_width=borders))
+def map_vietnam(dff2):
+    """Return a graph about number of covid-19 cases in Vietnam"""
+    #Plot the graph
+    fig=px.choropleth(data_frame=dff2,
+                        geojson=vietnam_geojson,locations='Tỉnh Thành',featureidkey="properties.Name_EN",
+                        # lat=10.762622,lon=106.660172,
+                        color='Số ca',
+                        hover_data=['Số ca'],
+                        color_continuous_scale="mint",
+                        # color_discrete_sequence=["green", "red"],
+                        scope="asia",
+                        labels={'VIETNAM COVID-19 CASES MAP'},
+                        template='plotly')
+    fig.update_layout(margin={"r":0,"t":0,"l":0,"b":0})
+    fig.update_geos(fitbounds="locations", visible=False)
+    return fig
+>>>>>>> b760b14c0d4f4ea863830d75b0a8462c9164efd5
 
 #datatable highlight selected_row
-@app.callback(
-    Output('datatable-vietnam', 'style_data_conditional'),
-    [Input('datatable-vietnam', 'derived_viewport_selected_rows'),]
-)
-def highlight_selectedRow(chosen_rows):
-    style_data_conditional=[
-                {
-                    'if': {'row_index': 'odd'},
-                    'backgroundColor': 'rgb(220, 220, 220)',
-                },
-                {
-                    'if': {'row_index': chosen_rows},
-                    'backgroundColor': '#D4F0F0'
-                },
-            ]
-    return style_data_conditional
-
-if __name__ == '__main__':
-    app.run_server(debug=True)
+# @app.callback(
+#     Output('datatable-vietnam', 'style_data_conditional'),
+#     [Input('datatable-vietnam', 'derived_viewport_selected_rows'),]
+# )
+# def highlight_selectedRow(chosen_rows):
+#     style_data_conditional=[
+#                 {
+#                     'if': {'row_index': 'odd'},
+#                     'backgroundColor': 'rgb(220, 220, 220)',
+#                 },
+#                 {
+#                     'if': {'row_index': chosen_rows},
+#                     'backgroundColor': '#D4F0F0'
+#                 },
+#             ]
+#     return style_data_conditional
