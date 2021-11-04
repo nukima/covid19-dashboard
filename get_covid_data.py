@@ -4,16 +4,18 @@ import pandas as pd
 import requests
 from bs4 import BeautifulSoup
 import io
+import json
 
 def map_world_data():
-    df=pd.read_csv('https://raw.githubusercontent.com/owid/covid-19-data/master/public/data/latest/owid-covid-latest.csv')
-    dff=df[['iso_code','location','total_cases','people_fully_vaccinated_per_hundred']].copy().sort_values(by=['total_cases'],ascending=False)
-    dff.reset_index(inplace=True)
-    dff=dff.rename(columns = {'iso_code':'id','location':'Quốc gia','people_fully_vaccinated_per_hundred':'Tỉ lệ tiêm vắc-xin','total_cases':'Số ca'}, inplace = False)
-    dff.set_index('id', inplace=True, drop=False)
-    totaldf=dff.loc[dff['id'].str.startswith('OWID')]
-    dff = dff.drop(dff.loc[dff['id'].str.startswith('OWID')].index)
-    return dff
+    url="https://services1.arcgis.com/0MSEUqKaxRlEPj5g/arcgis/rest/services/ncov_cases2_v1/FeatureServer/2/query?where=1%3D1&outFields=Country_Region,Confirmed,Deaths,Mortality_Rate,ISO3&returnGeometry=false&outSR=4326&f=json"
+    rq=requests.get(url).text
+    data=json.loads(rq)
+    df=pd.json_normalize(data["features"])
+    df.rename(columns={'attributes.Country_Region': 'Quốc gia', 'attributes.Confirmed': 'Số ca','attributes.Deaths':'Tử vong','attributes.Mortality_Rate':'Tỉ lệ tử vong','attributes.ISO3':'id'}, inplace=True)
+    df['Tỉ lệ tử vong'] = df['Tỉ lệ tử vong'].map('{:,.2f}'.format)
+    df.set_index('id', inplace=True, drop=False)
+    dff=df.sort_values(by=['Số ca'],ascending=False)
+    return df
 
 def map_vn_data():
     df=pd.read_html('https://www.statista.com/statistics/1103568/vietnam-coronavirus-cases-by-region/')[0]

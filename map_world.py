@@ -75,8 +75,8 @@ def map_world(dff2):
 
     fig=px.choropleth(data_frame=dff2,locations='id',locationmode='ISO-3',
                         color='Số ca',
-                        hover_data=['Quốc gia','Số ca','Tỉ lệ tiêm vắc-xin'],
-                        color_continuous_scale="mint",
+                        hover_data=['Số ca','Tử vong'],hover_name="Quốc gia",
+                        color_continuous_scale=px.colors.diverging.Portland,
                         color_continuous_midpoint=1000000,
                         range_color=[0,50000000],
                         labels={'WORLD COVID-19 CASES MAP'},
