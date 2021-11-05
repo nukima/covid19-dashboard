@@ -1,4 +1,5 @@
 # This Python file uses the following encoding: utf-8
+import numpy as np
 from numpy import NaN
 import pandas as pd
 import requests
@@ -15,19 +16,24 @@ def map_world_data():
     df['Tỉ lệ tử vong'] = df['Tỉ lệ tử vong'].map('{:,.2f}'.format)
     df.set_index('id', inplace=True, drop=False)
     dff=df.sort_values(by=['Số ca'],ascending=False)
-    return df
+    return dff
 
 def map_vn_data():
-    df=pd.read_html('https://www.statista.com/statistics/1103568/vietnam-coronavirus-cases-by-region/')[0]
-    vietnam_geojson = requests.get("https://data.opendevelopmentmekong.net/geoserver/ODMekong/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=ODMekong%3Aa4eb41a4-d806-4d20-b8aa-4835055a94c8&outputFormat=application%2Fjson").json()
-    df.loc[df['Characteristic']=='Ho Chi Minh City','Characteristic']='TP. Ho Chi Minh'
-    df.loc[df['Characteristic']=='Phu-Tho','Characteristic']='Phu Tho'
-    df.loc[df['Characteristic']=='Thua Thien Hue','Characteristic']='Thua Thien - Hue'
-    df.loc[df['Characteristic']=='Ben tre','Characteristic']='Ben Tre'
-    df['id'] = df['Characteristic']
-    df=df.rename(columns = {'Characteristic':'Tỉnh Thành','Number of cases':'Số ca'}, inplace = False)
-    df.set_index('id', inplace=True, drop=False)
-    return df,vietnam_geojson
+    today, total_data_df, today_data_df, overview_7days_df, city_data_df=get_vietnam_covid_data()
+    url="https://raw.githubusercontent.com/namnguyen215/dataset/main/vn_location.json"
+    rq=requests.get(url).text
+    data=json.loads(rq)
+    vn_location=pd.json_normalize(data)
+    df=city_data_df
+    df.loc[df['name']=="Bà Rịa – Vũng Tàu","name"]="Bà Rịa - Vũng Tàu"
+    dff=pd.merge(df,vn_location)
+    nocases=[]
+    for x in dff['cases']:
+        if(x == 0):
+            nocases.append(0)
+        else:
+            nocases.append(np.log2(x))
+    return dff,nocases
     
 def get_world_covid_data():
     """

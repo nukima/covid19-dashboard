@@ -13,7 +13,7 @@ from app import app
 
 # -----------------
 #Handle the data
-df,vietnam_geojson=map_vn_data()
+df,nocases=map_vn_data()
 # -----------------
 
 
@@ -24,7 +24,7 @@ layout=html.Div([
         columns=[
             {'name': i, 'id': i, 'deletable': False} for i in df.columns
             # omit the id column
-            if i != 'id' and i!="index"
+            if i != 'id' and i!="index" and i not in ["treating","recovered","lat","lng"]
         ],
         data=df.to_dict('records'),
         editable=False,
@@ -52,51 +52,45 @@ layout=html.Div([
 
 @app.callback(
     Output('mapv', 'children'),
-    [Input('datatable-vietnam', 'derived_virtual_data'),
-    Input('datatable-vietnam', 'derived_virtual_selected_rows')]
+    Input('datatable-vietnam', 'derived_virtual_selected_rows')
 )
 
-def update_graphs(all_rows_data, slctd_row_indices):
+def update_graphs(slctd_row_indices):
+    zoom_idx=5
     if slctd_row_indices is None:
         slctd_row_indices=[]
-    dff2 = pd.DataFrame(all_rows_data)
-    borders = [5 if i in slctd_row_indices else 1
-               for i in range(len(df))]
-    if "id" in dff2:
-        return dcc.Graph(id='MVN',figure=map_vietnam(dff2).update_traces(marker_line_width=borders))
-def map_vietnam(dff2):
-    """Return a graph about number of covid-19 cases in Vietnam"""
-    #Plot the graph
-    fig=px.choropleth(data_frame=dff2,
-                        geojson=vietnam_geojson,locations='Tỉnh Thành',featureidkey="properties.Name_EN",
-                        # lat=10.762622,lon=106.660172,
-                        color='Số ca',
-                        hover_data=['Số ca'],
-                        color_continuous_scale="mint",
-                        scope="asia",
-                        labels={'VIETNAM COVID-19 CASES MAP'},
-                        template='plotly')
+    id=0
+    if len(slctd_row_indices)>0:
+        id=slctd_row_indices[-1]
+        zoom_idx=7
+    return dcc.Graph(id='MVN',figure=map_vietnam(id,zoom_idx))
+
+def map_vietnam(id,zoom_idx):
+    fig = px.scatter_mapbox(df, lat="lat", lon="lng",hover_data={"cases":True,"casesToday":True,"lat":False,"lng":False},hover_name="name", size=nocases,color="cases",
+                            color_continuous_scale=px.colors.diverging.Tealrose, zoom=zoom_idx,
+                            center={"lat":df.at[id,"lat"],"lon":df.at[id,"lng"]})
+    fig.update_layout(mapbox_style="carto-positron")
+    fig.update_layout(clickmode="select")
     fig.update_layout(margin={"r":0,"t":0,"l":0,"b":0})
-    fig.update_geos(fitbounds="locations", visible=False)
     return fig
 
-#datatable highlight selected_row
-@app.callback(
-    Output('datatable-vietnam', 'style_data_conditional'),
-    [Input('datatable-vietnam', 'derived_viewport_selected_rows'),]
-)
-def highlight_selectedRow(chosen_rows):
-    style_data_conditional=[
-                {
-                    'if': {'row_index': 'odd'},
-                    'backgroundColor': 'rgb(220, 220, 220)',
-                },
-                {
-                    'if': {'row_index': chosen_rows},
-                    'backgroundColor': '#D4F0F0'
-                },
-            ]
-    return style_data_conditional
+# #datatable highlight selected_row
+# @app.callback(
+#     Output('datatable-vietnam', 'style_data_conditional'),
+#     [Input('datatable-vietnam', 'derived_viewport_selected_rows'),]
+# )
+# def highlight_selectedRow(chosen_rows):
+#     style_data_conditional=[
+#                 {
+#                     'if': {'row_index': 'odd'},
+#                     'backgroundColor': 'rgb(220, 220, 220)',
+#                 },
+#                 {
+#                     'if': {'row_index': chosen_rows},
+#                     'backgroundColor': '#D4F0F0'
+#                 },
+#             ]
+#     return style_data_conditional
 
-if __name__ == '__main__':
-    app.run_server(debug=True)
+# if __name__ == '__main__':
+#     app.run_server(debug=True)
