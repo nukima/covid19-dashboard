@@ -136,5 +136,5 @@ layout = html.Div([
         
     )
     
-])
+], id = "vietnam-page")
 #-------------

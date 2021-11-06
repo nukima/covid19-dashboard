@@ -1,0 +1,14 @@
+#vietnam-page > #undefined-parent {
+    padding: 100px;
+    height: calc(100vh - 63px);
+}
+#vietnam-page > :nth-child(2) {
+    width: calc(100vw * 0.7);
+    margin: auto;
+    height: calc(100vh/2);
+}
+#vietnam-page > :nth-child(3) {
+    height: calc(100vh/2);
+    width: calc(100vw * 0.7);
+    margin: auto;
+}
