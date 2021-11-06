@@ -72,31 +72,8 @@ layout = html.Div([
                 row_selectable="single",
                 row_deletable=False,
                 style_table={'height': '350px'},
-                # page_action="native",
-                # page_current=0,
-                # page_size=7,
                 fixed_rows={'headers': True, 'data': 0},
                 virtualization=True,
-                # style_cell={'textAlign': 'left'},
-                # style_cell_conditional=[
-                #     {'if': {'column_id': 'location'},
-                #      'width': '10%', 'textAlign': 'center'},
-                #     {'if': {'column_id': 'continent'},
-                #      'width': '5%', 'textAlign': 'center'},
-                #     {'if': {'column_id': 'total_cases'},
-                #      'width': '25%', 'textAlign': 'center'},
-                #     {'if': {'column_id': 'total_deaths'},
-                #      'width': '25%', 'textAlign': 'center'},
-                #     {'if': {'column_id': 'last_updated_date'},
-                #      'width': '10%', 'textAlign': 'center'},
-                #     {'if': {'column_id': 'people_vaccinated'},
-                #      'width': '25%', 'textAlign': 'center'},
-                # ],
-                # style_header={
-                #     'backgroundColor': '#CCE2CB',
-                #     'color': 'black',
-                #     'fontWeight': 'bold'
-                # }
             )
         ]),
         html.Div([
