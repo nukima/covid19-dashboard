@@ -83,6 +83,7 @@ layout = html.Div([
     ]),
     #Datatable
     html.Div([
+    html.Div([
             dash_table.DataTable(
                 id='datatable-s2',
                 style_data_conditional=[                
@@ -134,7 +135,7 @@ layout = html.Div([
         )
         ],
         
-    )
+    )])
     
 ], id = "vietnam-page")
 #-------------
