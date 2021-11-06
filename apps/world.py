@@ -100,6 +100,7 @@ layout = html.Div([
             )
         ]),
         html.Div([
+            html.Div([
             dcc.Dropdown(id='bar-dropdown-s2',
                          options=[
                              {'label': 'Số ca nhiễm / triệu dân',
@@ -113,12 +114,13 @@ layout = html.Div([
                          multi=False,
                          clearable=False
             ),
+            dcc.Graph(id='barchart-s2')]),
             html.Div([
-            dcc.Graph(id='barchart-s2'),
-            html.Div(id='piechart-s2')], id= "chart-box")
+            html.Div(id='piechart-s2')
+            ])
             # dcc.Graph(id='barchart-s2'),
             # html.Div(id='piechart-s2'),
-        ]),
+        ] , id= "chart-box"),
 
     # ])
 
