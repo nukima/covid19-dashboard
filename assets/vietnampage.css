@@ -3,12 +3,15 @@
     height: calc(100vh - 63px);
 }
 #vietnam-page > :nth-child(2) {
-    width: calc(100vw * 0.7);
-    margin: auto;
-    height: calc(100vh/2);
+    height: 100vh;
+    display: flex;
+    justify-content:space-around;
+    align-items: center;
 }
-#vietnam-page > :nth-child(3) {
-    height: calc(100vh/2);
-    width: calc(100vw * 0.7);
-    margin: auto;
+#vietnam-page > :nth-child(2) > :nth-child(1){
+    width: calc((100vw - 30px)/2);
+    /* height: 70vh; */
+}
+#vietnam-page > :nth-child(2) > :nth-child(2){
+    width: calc((100vw - 30px)/2);
 }
