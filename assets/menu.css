@@ -47,6 +47,7 @@ body {
   display: flex;
   justify-content: start;
   margin-left: 20px;
+  margin-bottom: 20px;
 }
 #menu-inside-home > div {
   font-size: 20px;

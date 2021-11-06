@@ -34,7 +34,7 @@ layout=html.Div([
         }],  
         data=df.to_dict('records'),
         # editable=False,
-        # filter_action="native",
+        filter_action="native",
         # sort_action="native",
         # sort_mode='multi',
         # row_selectable='multi',
