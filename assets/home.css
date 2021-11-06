@@ -54,5 +54,5 @@
 }
 #home-content  {
     opacity: 0;
-    animation: home_ani 2.5s forwards;
+    animation: home_ani 1s forwards;
 }
