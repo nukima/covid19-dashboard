@@ -24,7 +24,17 @@ app.layout = html.Div([
         dcc.Link('Việt Nam', href='/apps/vietnam',
                  style={'font-weight': 'bold'}),
     ], className="row", id = "menu"),
-    html.Div(id='page-content', children=[])
+    html.Div(id='page-content', children=[]),
+    html.Div(
+        [
+        html.Div(
+        [
+            html.Div("Dự án được khởi tạo bởi nhóm 3"),
+            html.Div("Thành viên: Dương Văn Giang, Nguyễn Kim Mạnh, Nguyễn Phương Nam"),
+            html.Div("Source: https://github.com/nukima/covid19-dashboard.git")
+        ])
+        ]
+    , id = "footer")
 ])
 
 
