@@ -49,7 +49,6 @@ layout = html.Div([
                     x='Ngày',
                     y='Số ca nhiễm',
                     template='seaborn',
-                    height=650,
                 )
             )
         ], style=tab_style, selected_style=tab_selected_style,
@@ -62,7 +61,6 @@ layout = html.Div([
                     x='Ngày',
                     y='Tử vong',
                     template='seaborn',
-                    height=650,
                 )
             )
         ], style=tab_style, selected_style=tab_selected_style
