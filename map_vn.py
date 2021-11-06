@@ -26,28 +26,56 @@ layout=html.Div([
             # omit the id column
             if i != 'id' and i!="index" and i not in ["treating","recovered","lat","lng"]
         ],
+        style_data_conditional=[                
+        {
+            "if": {"state": "selected"},
+            "backgroundColor": "inherit !important",
+            "border": "inherit !important",
+        }],  
         data=df.to_dict('records'),
-        editable=False,
-        filter_action="native",
+        # editable=False,
+        # filter_action="native",
+        # sort_action="native",
+        # sort_mode='multi',
+        # row_selectable='multi',
+        # row_deletable=False,
+        # selected_rows=[],
+        # page_action='native',
+        # page_current= 0,
+        # page_size= 10,
+        # style_header={
+        #                 'backgroundColor': '#CCE2CB',
+        #                 'fontWeight': 'bold'
+        #     },
+        # style_data_conditional=[
+        #         {
+        #             'if': {'row_index': 'odd'},
+        #             'backgroundColor': 'rgb(220, 220, 220)',
+        #         }
+        #     ],
         sort_action="native",
         sort_mode='multi',
         row_selectable='multi',
         row_deletable=False,
-        selected_rows=[],
-        page_action='native',
-        page_current= 0,
-        page_size= 10,
+        # selected_rows=[],
+        # page_action='native',
+        # page_current= 0,
+        # page_size= 10,
+        style_table={'height': '600px', 'overflowY': 'auto', "width": "400px"},
         style_header={
-                        'backgroundColor': '#CCE2CB',
-                        'fontWeight': 'bold'
-            },
-        style_data_conditional=[
-                {
-                    'if': {'row_index': 'odd'},
-                    'backgroundColor': 'rgb(220, 220, 220)',
-                }
-            ],
-    ),
+                        # 'backgroundColor': '#CCE2CB',
+                        'fontWeight': 'bold',
+                        'fontSize'  : '18px',
+                        # 'backgroundColor': '#fafafa'
+                    },
+         style_as_list_view=True,
+        # style_data_conditional=[
+        #         {
+        #             # 'if': {'row_index': 'odd'},
+        #             'backgroundColor': 'rgb(220, 220, 220)',
+        #         }
+        #     ],
+    )
 ])
 
 @app.callback(
