@@ -2,7 +2,11 @@
     opacity: 0;
     animation: home_ani 0.5s forwards;
 }
-#world-page > :nth-child(2){
+#world-page > :nth-child(3) {
+    position: relative;
+    left: calc(100% * 0.1);
+}
+#world-page > :nth-child(4){
     font-family: 'Roboto', sans-serif;
     /* margin: auto; */
     max-width: calc(100% * 0.8);
@@ -17,6 +21,7 @@
     background-color: #daf2e2;
     color: #056625;
     font-weight: 600;
+    font-size: 18px;
 }
 #datatable-s2 > :nth-child(2) > div > :nth-child(2) > :nth-child(2) > table > tbody > tr > td {
     text-align: center;
