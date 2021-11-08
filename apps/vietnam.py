@@ -72,6 +72,11 @@ layout = html.Div([
                     x='Ngày',
                     y='Số ca',
                     color='Chú thích',
+                    color_discrete_map={
+                        'MA200':'#147082',
+                        'Số ca nhiễm':'#095422',
+                        'MA50':'#84e83c',
+                    },
                     title='Số liệu thống kê',
                 )
             ),
@@ -87,6 +92,11 @@ layout = html.Div([
                     x='Ngày',
                     y='Số ca',
                     color='Chú thích',
+                    color_discrete_map={
+                        'MA200':'#147082',
+                        'Tử vong':'#095422',
+                        'MA50':'#84e83c',
+                    },
                     title='Số liệu thống kê',
                 )
             ),
@@ -102,6 +112,11 @@ layout = html.Div([
                     x='Thời gian',
                     y='Số người',
                     color='Chú thích',
+                    color_discrete_map={
+                        'MA100':'#147082',
+                        'Tổng số người đã tiêm':'#095422',
+                        'MA50':'#84e83c',
+                    },
                     title='Số liệu thống kê',
                 )
             ),
@@ -191,9 +206,14 @@ def update_horizontal_barchart(all_rows_data, slctd_row_indices,):
                 x='Tỷ lệ %',
                 y='fK',
                 color='Chú thích',
+                color_discrete_map={
+                    'Tỷ lệ chưa tiêm':'#147082',
+                    'Tỷ lệ tiêm đủ liều':'#095422',
+                    'Tỷ lệ tiêm 1 mũi':'#84e83c',
+                },
                 orientation='h',
                 title='So sánh tình trạng tiêm vaccine của các tỉnh/thành phố trong bảng bên',
-                labels={'fK':'Tỉnh'},
+                labels={'fK':'Tỉnh/Thành phố'},
                 height= 650,
                 ),            
             )
