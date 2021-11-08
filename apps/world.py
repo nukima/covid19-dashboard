@@ -170,7 +170,7 @@ def update_barchart(continent_selected, all_rows_data, barchart_xaxis, slctd_row
     )
     barchart.update_layout(yaxis={'categoryorder':'total ascending'})
     if slctd_row_indices != None:
-        colors = ['#6b1d25' if i in slctd_row_indices else '#056625'
+        colors = ['#eb1e33' if i in slctd_row_indices else '#056625'
                 for i in range(len(barchart_data))]
         barchart.update_traces(marker_color=colors)
 
@@ -208,11 +208,12 @@ def piechart_update(all_rows_data, slctd_row_indices,):
             value = dcc.Graph(
                     figure = px.pie(
                                         data_frame= piechart_data, names='Trạng thái', values='Số người',
+                                        color='Trạng thái',
                                         hole=0.3, title=f"Tình trạng tiêm vaccine ở {country_name}",
                                         color_discrete_map={
-                                            'Chưa tiêm':'lightcyan',
-                                            'Đã tiêm hai mũi':'cyan',
-                                            'Đã tiêm 1 mũi':'royalblue',
+                                            'Chưa tiêm':'#58b093',
+                                            'Đã tiêm hai mũi':'#056625',
+                                            'Đã tiêm 1 mũi':'#84e83c',
                                         },
                                         width=650,
                                     ),
