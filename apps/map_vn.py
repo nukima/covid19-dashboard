@@ -53,6 +53,7 @@ layout=html.Div([
             "border": "inherit !important",
         }],  
         data=df.to_dict('records'),
+        fixed_rows={'headers': True, 'data': 0},
         filter_action="native",
         sort_action="native",
         sort_mode='multi',
