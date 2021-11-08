@@ -9,7 +9,10 @@ from dash.dependencies import Input, Output
 from get_covid_data import map_vn_data
 #app
 from app import app
+#navbar
+from .navbar import create_navbar
 
+nav = create_navbar()
 
 # -----------------
 #Handle the data
@@ -18,6 +21,7 @@ df,nocases,cases,deaths=map_vn_data()
 
 
 layout=html.Div([
+    nav,
     html.Div(id="mapv"),
     html.Div(id="total",children=[
         html.Div("Tổng số ca nhiễm: "+str(cases)),

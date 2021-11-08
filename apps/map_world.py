@@ -8,7 +8,10 @@ from dash.dependencies import Input, Output
 from get_covid_data import map_world_data
 #app
 from app import app
+#navbar
+from .navbar import create_navbar
 
+nav = create_navbar()
 # -----------------
 #Handle the data
 dff,cases,deaths=map_world_data()
@@ -17,7 +20,8 @@ dff,cases,deaths=map_world_data()
 
 #Map world layout
 layout=html.Div([
-    #Place to put the map
+    #Place to put the 
+    nav,
     html.Div(id="mapw"),
     html.Div(id="total",children=[
         html.Div("Tổng số ca nhiễm: "+str(cases)),
