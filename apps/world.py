@@ -12,7 +12,10 @@ import pandas as pd
 from get_covid_data import *
 #app
 from app import app
+#navbar
+from .navbar import create_navbar
 
+nav = create_navbar()
 # -----------------
 # Get data
 world_data = get_world_covid_data()
@@ -23,6 +26,7 @@ layout = html.Div([
     # World Section 
     # html.Div([
         # dropdown continent
+        nav,
         html.Div([
             dcc.Checklist(
                 id='continent-checklist',

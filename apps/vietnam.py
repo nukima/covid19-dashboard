@@ -11,7 +11,10 @@ import pandas as pd
 from get_covid_data import *
 #app
 from app import app
+#navbar
+from .navbar import create_navbar
 
+nav = create_navbar()
 
 # -----------------
 # Get data
@@ -59,6 +62,7 @@ tab_selected_style = {
 #-------------
 #layout
 layout = html.Div([
+    nav,
     dcc.Tabs([
         #linechart so ca nhiem
         dcc.Tab(label='Số ca nhiễm', children=[

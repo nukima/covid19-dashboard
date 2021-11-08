@@ -1,84 +1,93 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
-*{
-  box-sizing: border-box;
-  padding: 0px;
-  margin: 0px;
+* {
+    box-sizing: border-box;
+    padding: 0px;
+    margin: 0px;
 }
+
 body {
-  font-family: 'Roboto', sans-serif;
+    font-family: 'Roboto', sans-serif;
 }
+
 #title {
-  position: absolute;
-  left: 10px;
-  /* width: 100%; */
-  font-size: 20px;
-  text-align: center;
-  font-size: 30px;
-  padding: 20px 0px 5px 0px;
-  text-transform: uppercase;
+    position: absolute;
+    left: 10px;
+    /* width: 100%; */
+    font-size: 20px;
+    text-align: center;
+    font-size: 30px;
+    padding: 20px 0px 5px 0px;
+    text-transform: uppercase;
 }
+
 #menu {
-  width: calc(100%-200px);
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-end;
-  margin-bottom: 10px;
-  /* justify-content: center; */
+    width: calc(100%-200px);
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    margin-bottom: 10px;
+    /* justify-content: center; */
 }
-#menu > :nth-child(2),
-#menu > :nth-child(3),
-#menu > :nth-child(4) {
-  
-  position: relative;
-  top: 10px;
-  left: -100px;
-  font-weight: 600;
-  color: rgb(182, 182, 182);
-  padding: 5px 10px;
-  text-decoration: none;
-  font-size: 30px;
-  background-color: rgb(86, 94, 211);
-  /* display: flex;
+
+#menu> :nth-child(2),
+#menu> :nth-child(3),
+#menu> :nth-child(4) {
+    position: relative;
+    top: 10px;
+    left: -100px;
+    font-weight: 600;
+    color: rgb(182, 182, 182);
+    padding: 5px 10px;
+    text-decoration: none;
+    font-size: 30px;
+    background-color: rgb(86, 94, 211);
+    /* display: flex;
   justify-content: center;
   align-items: center; */
-  margin: 10px;
-  border-radius: 10px;
-  cursor: pointer;
-  transition: all 0.5s ease;
+    margin: 10px;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.5s ease;
 }
-#menu > a:hover {
-  color: rgb(255, 255, 255);
-  background-color: rgb(2, 18, 243);
+
+#menu>a:hover {
+    color: rgb(255, 255, 255);
+    background-color: rgb(2, 18, 243);
 }
-#datatable-world{
+
+#datatable-world {
     max-width: 800px;
     margin: auto;
 }
+
 #menu-inside-home {
-  width: calc(100vw - 40px);
-  display: flex;
-  justify-content: start;
-  margin-left: 20px;
-  margin-bottom: 20px;
+    width: calc(100vw - 40px);
+    display: flex;
+    justify-content: start;
+    margin-left: 20px;
+    margin-bottom: 20px;
 }
-#menu-inside-home > div {
-  font-size: 20px;
-  text-transform: uppercase;
-  padding: 5px 10px;
-  
-  border-radius: 10px;
-  font-weight: 600;
-  margin-right: 20px;
-  cursor: pointer;
+
+#menu-inside-home>div {
+    font-size: 20px;
+    text-transform: uppercase;
+    padding: 5px 10px;
+    border-radius: 10px;
+    font-weight: 600;
+    margin-right: 20px;
+    cursor: pointer;
 }
+
 .home-btn {
-  background-color: rgb(243, 163, 163);
+    background-color: rgb(243, 163, 163);
 }
-#menu-inside-home > div:hover {
-  background-color: rgb(255, 0, 0);
-  color: white;
+
+#menu-inside-home>div:hover {
+    background-color: rgb(255, 0, 0);
+    color: white;
 }
-.home-btn-chose{
-  background-color: rgb(255, 0, 0);
-  color: white;
+
+.home-btn-chose {
+    background-color: rgb(255, 0, 0);
+    color: white;
 }
