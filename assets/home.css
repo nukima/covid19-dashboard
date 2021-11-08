@@ -23,12 +23,14 @@
     font-size: 11px;
 }
 
-/* #datatable-world .cell-table > tbody > :nth-child(1),
-#datatable-vietnam .cell-table > tbody > :nth-child(1) {
-    color: #056625;
+#datatable-world .cell-table > tbody > :nth-child(1),
+#datatable-vietnam .cell-table > tbody > :nth-child(1),
+#datatable-world .cell-table > tbody > :nth-child(2),
+#datatable-vietnam .cell-table > tbody > :nth-child(2) {
+    /* color: #056625; */
     background-color: #daf2e2;
     height: 30px;
-} */
+}
 #datatable-world .cell-table > tbody > :nth-child(1):hover > *,
 #datatable-world .cell-table > tbody > :nth-child(2):hover > *,
 #datatable-vietnam .cell-table > tbody > :nth-child(1):hover > *,
@@ -52,7 +54,6 @@
 #datatable-world .cell-table > tbody > :nth-child(1) > :nth-child(3) {
     color: #056625;
 }
-
 /* style layout */
 #home-content {
     width: calc(100vw - 15px);
