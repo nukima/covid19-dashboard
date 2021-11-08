@@ -13,7 +13,7 @@ from apps import world, vietnam, maps
 
 # first section layout
 app.layout = html.Div([
-    html.H1("Covid19 Thông Tin" , id = "title"),
+    html.H1("Thông tin Covid-19" , id = "title"),
     dcc.Location(id='url', refresh=False),
     html.Div([
         dcc.Link('Home', href='/',
@@ -28,9 +28,9 @@ app.layout = html.Div([
         [
         html.Div(
         [
-            html.Div("Dự án được khởi tạo bởi nhóm 3"),
+            html.Div("Đề tài thực hiện bởi nhóm 3"),
             html.Div("Thành viên: Dương Văn Giang, Nguyễn Kim Mạnh, Nguyễn Phương Nam"),
-            html.Div("Source: https://github.com/nukima/covid19-dashboard.git")
+            html.A("Source Code: Github", href='https://github.com/nukima/covid19-dashboard', target="_blank")
         ])
         ]
     , id = "footer")

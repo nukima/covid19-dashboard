@@ -1,9 +1,9 @@
 #footer{
     width: calc(100% - 30px);
     /* height: 70px; */
-    background-color: rgb(87, 87, 87);
-    font-weight: 600;
-    color: white;
+    background-color: #daf2e2;
+    font-weight: 550;
+    color: #056625;
     padding: 10px;
     display: flex;
     justify-content: center;
