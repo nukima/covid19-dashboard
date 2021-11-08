@@ -61,7 +61,7 @@ layout=html.Div([
         sort_action="native",
         sort_mode='multi',
         row_selectable='multi',
-        style_table={'height': '600px', 'overflowY': 'auto','border': '1px solid grey'},
+        style_table={'height': '600px', 'overflowY': 'auto','border': '1px solid grey', "width": "500px"},
         style_data={ 'border': '1px solid grey' },
         style_header={
                         'backgroundColor': '#daf2e2',

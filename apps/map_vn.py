@@ -60,7 +60,7 @@ layout=html.Div([
         sort_mode='multi',
         row_selectable='multi',
         row_deletable=False,
-        style_table={'height': '600px', 'overflowY': 'auto', "width": "400px"},
+        style_table={'height': '600px', 'overflowY': 'auto', "width": "500px"},
         style_header={
                         'backgroundColor': '#daf2e2',
                         'fontWeight': 'bold',
