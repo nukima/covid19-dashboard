@@ -180,9 +180,8 @@ layout = html.Div([
 def update_horizontal_barchart(all_rows_data, slctd_row_indices,):
     dff = pd.DataFrame(all_rows_data)
     if not slctd_row_indices:
-        slctd_row_indices = dff.index
-    print(slctd_row_indices)
-    print(dff)
+        slctd_row_indices = dff.index 
+    
     city_name = dff.iloc[slctd_row_indices, :]['fK']
     h_barchart_data = vietnam_vaccine_city[vietnam_vaccine_city['fK'].isin(city_name)][['fK','Tỷ lệ tiêm đủ liều', 'Tỷ lệ chưa tiêm', 'Tỷ lệ tiêm 1 mũi']]
     h_barchart_data = pd.melt(h_barchart_data, id_vars=['fK'], value_vars=['Tỷ lệ tiêm đủ liều', 'Tỷ lệ tiêm 1 mũi','Tỷ lệ chưa tiêm' ], var_name='Chú thích', value_name='Tỷ lệ %')

@@ -21,7 +21,7 @@ app.layout = html.Div([
         [
             html.Div("Dự án được khởi tạo bởi nhóm 3"),
             html.Div("Thành viên: Dương Văn Giang, Nguyễn Kim Mạnh, Nguyễn Phương Nam"),
-            html.Div("Source: https://github.com/nukima/covid19-dashboard.git")
+            html.A("Source Code: Github", href='https://github.com/nukima/covid19-dashboard.git', target="_blank"),
         ])
         ]
     , id = "footer")

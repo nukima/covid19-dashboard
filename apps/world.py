@@ -44,6 +44,7 @@ layout = html.Div([
                 labelClassName='my_box_label'
             )
         ], id= "check-list-bar"),
+        html.A("Nguồn: Our World in Data", href='https://github.com/owid/covid-19-data', target="_blank"),
         # Datatable
         html.Div([
             dash_table.DataTable(
