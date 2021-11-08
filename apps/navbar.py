@@ -27,8 +27,9 @@ def create_navbar():
         brand="THÔNG TIN COVID-19",  # Set the text on the left side of the Navbar
         brand_href="/",  # Set the URL where the user will be sent when they click the brand we just created "THÔNG TIN COVID-19"
         sticky="top",  # Stick it to the top... like Spider Man crawling on the ceiling?
-        color="dark",  # Change this to change color of the navbar e.g. "primary", "secondary" etc.
+        color="#3da05b",  # Change this to change color of the navbar e.g. "primary", "secondary" etc.
         dark=True,  # Change this to change color of text within the navbar (False for light text)
+        brand_style={"fontSize":32,"fontWeight":600}
     )
 
     return navbar
