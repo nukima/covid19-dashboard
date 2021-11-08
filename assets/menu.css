@@ -12,24 +12,20 @@ body {
 #title {
     position: absolute;
     left: 10px;
-    /* width: 100%; */
     font-size: 20px;
     text-align: center;
     font-size: 30px;
     padding: 20px 0px 5px 0px;
     text-transform: uppercase;
 }
-
 #menu {
     width: calc(100%-200px);
     display: flex;
     flex-direction: row;
     justify-content: flex-end;
     margin-bottom: 10px;
-    /* justify-content: center; */
 }
-
-#menu> :nth-child(2),
+/* #menu> :nth-child(2),
 #menu> :nth-child(3),
 #menu> :nth-child(4) {
     position: relative;
@@ -41,21 +37,16 @@ body {
     text-decoration: none;
     font-size: 30px;
     background-color: rgb(86, 94, 211);
-    /* display: flex;
-  justify-content: center;
-  align-items: center; */
     margin: 10px;
     border-radius: 10px;
     cursor: pointer;
     transition: all 0.5s ease;
 }
-
 #menu>a:hover {
     color: rgb(255, 255, 255);
     background-color: rgb(2, 18, 243);
-}
-
-#datatable-world {
+} */
+/* #datatable-world {
     max-width: 800px;
     margin: auto;
 }
@@ -90,4 +81,4 @@ body {
 .home-btn-chose {
     background-color: rgb(255, 0, 0);
     color: white;
-}
+} */

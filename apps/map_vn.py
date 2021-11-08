@@ -61,6 +61,7 @@ layout=html.Div([
         row_deletable=False,
         style_table={'height': '600px', 'overflowY': 'auto', "width": "400px"},
         style_header={
+                        'backgroundColor': '#daf2e2',
                         'fontWeight': 'bold',
                         'fontSize'  : '18px',
                     },
