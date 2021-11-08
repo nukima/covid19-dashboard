@@ -13,12 +13,17 @@ from app import app
 
 # -----------------
 #Handle the data
-df,nocases=map_vn_data()
+df,nocases,cases,deaths=map_vn_data()
 # -----------------
 
 
 layout=html.Div([
     html.Div(id="mapv"),
+    html.Div(id="total",children=[
+        html.Div("Tổng số ca nhiễm: "+str(cases)),
+        html.Div("Tổng số ca tử vong: "+str(deaths)),
+        
+    ]),
     dash_table.DataTable(
         id='datatable-vietnam',
         columns=[

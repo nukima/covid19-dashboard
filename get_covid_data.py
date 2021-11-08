@@ -16,7 +16,9 @@ def map_world_data():
     df['Tỉ lệ tử vong'] = df['Tỉ lệ tử vong'].map('{:,.2f}'.format)
     df.set_index('id', inplace=True, drop=False)
     dff=df.sort_values(by=['Số ca'],ascending=False)
-    return dff
+    cases=dff['Số ca'].sum()
+    deaths=dff['Tử vong'].sum() 
+    return dff,cases,deaths
 
 def map_vn_data():
     today, total_data_df, today_data_df, overview_7days_df, city_data_df=get_vietnam_covid_data()
@@ -33,7 +35,9 @@ def map_vn_data():
             nocases.append(0)
         else:
             nocases.append(np.log2(x))
-    return dff,nocases
+    cases=dff['cases'].sum()
+    deaths=dff['death'].sum()    
+    return dff,nocases,cases,deaths
     
 def get_world_covid_data():
     """

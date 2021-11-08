@@ -11,7 +11,7 @@ from app import app
 
 # -----------------
 #Handle the data
-dff=map_world_data()
+dff,cases,deaths=map_world_data()
 # -----------------
 
 
@@ -19,6 +19,11 @@ dff=map_world_data()
 layout=html.Div([
     #Place to put the map
     html.Div(id="mapw"),
+    html.Div(id="total",children=[
+        html.Div("Tổng số ca nhiễm: "+str(cases)),
+        html.Div("Tổng số ca tử vong: "+str(deaths)),
+        
+    ]),
     #Place to put the table
     dash_table.DataTable(
         id='datatable-world',
@@ -84,11 +89,12 @@ def map_world(dff2):
     fig=px.choropleth(data_frame=dff2,locations='id',locationmode='ISO-3',
                         color='Số ca',
                         hover_data=['Số ca','Tử vong'],hover_name="Quốc gia",
-                        color_continuous_scale=px.colors.diverging.Portland,
+                        color_continuous_scale=px.colors.diverging.Tealrose,
                         color_continuous_midpoint=1000000,
                         range_color=[0,50000000],
-                        labels={'WORLD COVID-19 CASES MAP'},
                         template='plotly')
+    fig.update_geos(fitbounds="locations", visible=False)
+    fig.update_layout(margin={"r":0,"t":0,"l":0,"b":0})
     return fig
 
 #datatable highlight selected_row

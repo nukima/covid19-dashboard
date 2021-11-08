@@ -13,10 +13,9 @@ from apps import world, vietnam, maps
 
 # first section layout
 app.layout = html.Div([
-  
+    html.H1("Covid19 Thông Tin" , id = "title"),
     dcc.Location(id='url', refresh=False),
     html.Div([
-        html.H1("Covid19 Thông Tin" , id = "title"),
         dcc.Link('Home', href='/',
                  style={'font-weight': 'bold'}),
         dcc.Link('World', href='/apps/world',
