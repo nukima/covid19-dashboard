@@ -13,10 +13,9 @@ from apps import world, vietnam, maps
 
 # first section layout
 app.layout = html.Div([
-  
+    html.H1("Covid19 Thông Tin" , id = "title"),
     dcc.Location(id='url', refresh=False),
     html.Div([
-        html.H1("Covid19 Thông Tin" , id = "title"),
         dcc.Link('Home', href='/',
                  style={'font-weight': 'bold'}),
         dcc.Link('World', href='/apps/world',
@@ -24,7 +23,17 @@ app.layout = html.Div([
         dcc.Link('Việt Nam', href='/apps/vietnam',
                  style={'font-weight': 'bold'}),
     ], className="row", id = "menu"),
-    html.Div(id='page-content', children=[])
+    html.Div(id='page-content', children=[]),
+    html.Div(
+        [
+        html.Div(
+        [
+            html.Div("Dự án được khởi tạo bởi nhóm 3"),
+            html.Div("Thành viên: Dương Văn Giang, Nguyễn Kim Mạnh, Nguyễn Phương Nam"),
+            html.Div("Source: https://github.com/nukima/covid19-dashboard.git")
+        ])
+        ]
+    , id = "footer")
 ])
 
 
