@@ -22,12 +22,22 @@ dff,cases,deaths=map_world_data()
 layout=html.Div([
     #Place to put the 
     nav,
+    html.Div([
     html.Div(id="mapw"),
+    html.Div([
     html.Div(id="total",children=[
-        html.Div("Tổng số ca nhiễm: "+str(cases)),
-        html.Div("Tổng số ca tử vong: "+str(deaths)),
-        
-    ]),
+        html.Div("Thế Giới"),
+        html.Div([
+        html.Div([
+        html.Div("Tổng số ca nhiễm: "),
+        html.Div(str(cases))
+        ]),
+        html.Div([
+        html.Div("Tổng số ca tử vong: "),
+        html.Div(str(deaths))
+        ])
+        ])
+    ], className= "totalDiv"),
     #Place to put the table
     dash_table.DataTable(
         id='datatable-world',
@@ -67,7 +77,8 @@ layout=html.Div([
         #             # 'backgroundColor': 'rgb(220, 220, 220)',
         #         }
         #     ],
-    ),
+    )])
+    ], id = "map_world"),
 ])
 
 # -----------------

@@ -22,12 +22,23 @@ df,nocases,cases,deaths=map_vn_data()
 
 layout=html.Div([
     nav,
+    html.Div([
     html.Div(id="mapv"),
+    html.Div([
     html.Div(id="total",children=[
-        html.Div("Tổng số ca nhiễm: "+str(cases)),
-        html.Div("Tổng số ca tử vong: "+str(deaths)),
-        
-    ]),
+        html.Div("Việt Nam"),
+        html.Div([
+        html.Div([
+        html.Div("Tổng số ca nhiễm: "),
+        html.Div(str(cases))
+        ]),
+        html.Div([
+        html.Div("Tổng số ca tử vong: "),
+        html.Div(str(deaths))
+        ]),
+        ]
+        )
+    ], className= "totalDiv"),
     dash_table.DataTable(
         id='datatable-vietnam',
         columns=[
@@ -42,49 +53,18 @@ layout=html.Div([
             "border": "inherit !important",
         }],  
         data=df.to_dict('records'),
-        # editable=False,
         filter_action="native",
-        # sort_action="native",
-        # sort_mode='multi',
-        # row_selectable='multi',
-        # row_deletable=False,
-        # selected_rows=[],
-        # page_action='native',
-        # page_current= 0,
-        # page_size= 10,
-        # style_header={
-        #                 'backgroundColor': '#CCE2CB',
-        #                 'fontWeight': 'bold'
-        #     },
-        # style_data_conditional=[
-        #         {
-        #             'if': {'row_index': 'odd'},
-        #             'backgroundColor': 'rgb(220, 220, 220)',
-        #         }
-        #     ],
         sort_action="native",
         sort_mode='multi',
         row_selectable='multi',
         row_deletable=False,
-        # selected_rows=[],
-        # page_action='native',
-        # page_current= 0,
-        # page_size= 10,
         style_table={'height': '600px', 'overflowY': 'auto', "width": "400px"},
         style_header={
-                        # 'backgroundColor': '#CCE2CB',
                         'fontWeight': 'bold',
                         'fontSize'  : '18px',
-                        # 'backgroundColor': '#fafafa'
                     },
          style_as_list_view=True,
-        # style_data_conditional=[
-        #         {
-        #             # 'if': {'row_index': 'odd'},
-        #             'backgroundColor': 'rgb(220, 220, 220)',
-        #         }
-        #     ],
-    )
+    )])], id = "map_vn")
 ])
 
 @app.callback(
@@ -111,23 +91,3 @@ def map_vietnam(id,zoom_idx):
     fig.update_layout(margin={"r":0,"t":0,"l":0,"b":0})
     return fig
 
-# #datatable highlight selected_row
-# @app.callback(
-#     Output('datatable-vietnam', 'style_data_conditional'),
-#     [Input('datatable-vietnam', 'derived_viewport_selected_rows'),]
-# )
-# def highlight_selectedRow(chosen_rows):
-#     style_data_conditional=[
-#                 {
-#                     'if': {'row_index': 'odd'},
-#                     'backgroundColor': 'rgb(220, 220, 220)',
-#                 },
-#                 {
-#                     'if': {'row_index': chosen_rows},
-#                     'backgroundColor': '#D4F0F0'
-#                 },
-#             ]
-#     return style_data_conditional
-
-# if __name__ == '__main__':
-#     app.run_server(debug=True)
