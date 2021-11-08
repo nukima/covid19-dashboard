@@ -1,4 +1,3 @@
-
 #datatable-world .cell-table,
 #datatable-vietnam  .cell-table {
     font-family: 'Roboto', sans-serif;
@@ -14,33 +13,29 @@
 #datatable-world .cell-table > tbody > tr:hover > *,
 #datatable-vietnam .cell-table > tbody > tr:hover > * {
     background-color: rgb(68, 68, 68);
-    /* color: white; */
+    color: white;
 }
 #datatable-world .cell-table > tbody span,
 #datatable-vietnam .cell-table > tbody span {
     white-space:pre-wrap;
     text-transform: uppercase;
     text-align: center;
-}
-#datatable-vietnam .cell-table > tbody span {
     font-size: 11px;
 }
-#datatable-world .cell-table > tbody > :nth-child(1),
+
+/* #datatable-world .cell-table > tbody > :nth-child(1),
 #datatable-vietnam .cell-table > tbody > :nth-child(1) {
     color: #056625;
     background-color: #daf2e2;
     height: 30px;
-}
-#datatable-vietnam .cell-table > tbody > :nth-child(1) {
-    
-}
+} */
 #datatable-world .cell-table > tbody > :nth-child(1):hover > *,
 #datatable-world .cell-table > tbody > :nth-child(2):hover > *,
 #datatable-vietnam .cell-table > tbody > :nth-child(1):hover > *,
 #datatable-vietnam .cell-table > tbody > :nth-child(2):hover > *   {
-    background-color: rgb(255, 255, 255);
+    background-color: rgb(68, 68, 68);
     /* color: rgb(0, 0, 0); */
-}
+} 
 #datatable-world .cell-table > tbody > tr > th,
 #datatable-vietnam .cell-table > tbody > tr > th{
     cursor: pointer;
@@ -57,9 +52,10 @@
 #datatable-world .cell-table > tbody > :nth-child(1) > :nth-child(3) {
     color: #056625;
 }
+
+/* style layout */
 #home-content {
     width: calc(100vw - 15px);
-    
 }
 #home-content > div {
     width: 100%;
@@ -73,7 +69,7 @@
     animation: home_ani 1s forwards;
 }
 
-
+/* style total info */
 #map_world,
 #map_vn {
     width: calc(100vw - 30px);
@@ -114,7 +110,7 @@
 
 #mapw {
     height: 733px;
-    width: calc(100vw - 30px - 400px - 30px);
+    width: calc(100vw - 30px - 500px - 30px);
 }
 #mapv {
     height: 733px;
