@@ -85,7 +85,7 @@ def update_graphs(slctd_row_indices):
     return dcc.Graph(id='MVN',figure=map_vietnam(id,zoom_idx))
 
 def map_vietnam(id,zoom_idx):
-    fig = px.scatter_mapbox(df, lat="lat", lon="lng",hover_data={"cases":True,"casesToday":True,"lat":False,"lng":False},hover_name="name", size=nocases,color="cases",
+    fig = px.scatter_mapbox(df, lat="lat", lon="lng",hover_data={"Số ca":True,"Số ca hôm nay":True,"lat":False,"lng":False},hover_name="Tỉnh thành", size=nocases,color="Số ca",
                             color_continuous_scale=px.colors.diverging.Tealrose, zoom=zoom_idx,
                             center={"lat":df.at[id,"lat"],"lon":df.at[id,"lng"]})
     fig.update_layout(mapbox_style="carto-positron")

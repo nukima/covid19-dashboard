@@ -53,16 +53,14 @@ layout=html.Div([
                "if": {"state": "selected"},
                "backgroundColor": "inherit !important",
                "border": "inherit !important",
-           }],  
+           },
+            {'if': {'column_id': 'Quốc gia'},
+            'width': '5%', 'textAlign': 'center'},],  
+        fixed_rows={'headers': True, 'data': 0},
         filter_action="native",
         sort_action="native",
         sort_mode='multi',
         row_selectable='multi',
-        # row_deletable=False,
-        # selected_rows=[],
-        # page_action='native',
-        # page_current= 0,
-        # page_size= 10,
         style_table={'height': '600px', 'overflowY': 'auto','border': '1px solid grey'},
         style_data={ 'border': '1px solid grey' },
         style_header={
@@ -71,12 +69,6 @@ layout=html.Div([
                         'fontSize'  : '18px'
             },
         style_as_list_view=True,
-        # style_data_conditional=[
-        #         {
-        #             "cusor": "poiter",
-        #             # 'backgroundColor': 'rgb(220, 220, 220)',
-        #         }
-        #     ],
     )])
     ], id = "map_world"),
 ])
