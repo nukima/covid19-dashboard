@@ -45,11 +45,24 @@ layout = html.Div([
             dash_table.DataTable(
                 id='datatable-s2',
                 style_data_conditional=[                
-                {
-                    "if": {"state": "selected"},
-                    "backgroundColor": "inherit !important",
-                    "border": "inherit !important",
-                }],  
+                    {
+                        "if": {"state": "selected"},
+                        "backgroundColor": "inherit !important",
+                        "border": "inherit !important",
+                    },
+                    {'if': {'column_id': 'continent'},
+                    'width': '10%', 'textAlign': 'center'},
+                    {'if': {'column_id': 'location'},
+                    'width': '18%', 'textAlign': 'center'},
+                    {'if': {'column_id': 'total_cases'},
+                    'width': '18%', 'textAlign': 'center'},
+                    {'if': {'column_id': 'total_deaths'},
+                    'width': '18%', 'textAlign': 'center'},
+                    {'if': {'column_id': 'people_vaccinated'},
+                    'width': '18%', 'textAlign': 'center'},
+                    {'if': {'column_id': 'last_updated_date'},
+                    'width': '18%', 'textAlign': 'center'},
+                ],  
                 # data=[{}],
                 columns=[
                     {"name": 'Châu lục', "id": 'continent',
@@ -148,12 +161,11 @@ def update_barchart(continent_selected, all_rows_data, barchart_xaxis, slctd_row
                 "total_cases_per_million":"Số ca nhiễm / triệu dân",
                 "people_vaccinated_per_hundred" : "Đã tiêm vaccine (ít nhất 1 mũi) / triệu dân",
                 "total_deaths_per_million":"Ca tử vong / triệu dân"},
-        template='seaborn',
-        width= 500
+        width= 800,
     )
     barchart.update_layout(yaxis={'categoryorder':'total ascending'})
     if slctd_row_indices != None:
-        colors = ['#FF0000' if i in slctd_row_indices else '#0074D9'
+        colors = ['#6b1d25' if i in slctd_row_indices else '#056625'
                 for i in range(len(barchart_data))]
         barchart.update_traces(marker_color=colors)
 
@@ -167,27 +179,7 @@ def update_barchart(continent_selected, all_rows_data, barchart_xaxis, slctd_row
         Input('datatable-s2', 'derived_virtual_selected_rows'),
     ]
 )
-def highlight_selectedRow(all_rows_data, slctd_row_indices,):
-#     #highlight selected row datatable
-    # if chosen_rows != None:
-        # style_data_conditional=[
-        #         {
-        #             'if': {'row_index': 'odd'},
-        #             'backgroundColor': 'rgb(220, 220, 220)',
-        #         },
-        #         {
-        #             'if': {'row_index': chosen_rows},
-        #             'backgroundColor': '#D4F0F0'
-        #         },
-        #     ]
-    # else:
-        # style_data_conditional=[
-        #         {
-        #             'if': {'row_index': 'odd'},
-        #             'backgroundColor': 'rgb(220, 220, 220)',
-        #         },
-        #     ]
-    #---------------
+def piechart_update(all_rows_data, slctd_row_indices,):
     #piechart
     dff = pd.DataFrame(all_rows_data)
     if not slctd_row_indices:
@@ -204,16 +196,22 @@ def highlight_selectedRow(all_rows_data, slctd_row_indices,):
         if piechart_data.loc[2, 0] == None or piechart_data.loc[3, 0] == None or piechart_data.loc[4, 0] == None:
             value = "Chưa đủ số liệu"
         elif piechart_data.loc[2, 0] > 0 and piechart_data.loc[3, 0] > 0 and piechart_data.loc[4, 0] > 0:
-            piechart_data.replace(to_replace="not_vaccinated", value="Chưa tiêm vaccine", inplace=True)
+            piechart_data.replace(to_replace="not_vaccinated", value="Chưa tiêm", inplace=True)
             piechart_data.replace(to_replace="people_fully_vaccinated", value="Đã tiêm hai mũi", inplace=True)
-            piechart_data.replace(to_replace="people_vaccinated", value="Đã tiêm 1 mũi vaccine", inplace=True)
+            piechart_data.replace(to_replace="people_vaccinated", value="Đã tiêm 1 mũi", inplace=True)
             piechart_data.rename(columns={"index": "Trạng thái", 0: "Số người"}, inplace=True)
             value = dcc.Graph(
                     figure = px.pie(
-                                    data_frame= piechart_data, names='Trạng thái', values='Số người',
-                                    hole=0.3, title=f"Tình trạng tiêm vaccine ở {country_name}", template='seaborn'
+                                        data_frame= piechart_data, names='Trạng thái', values='Số người',
+                                        hole=0.3, title=f"Tình trạng tiêm vaccine ở {country_name}",
+                                        color_discrete_map={
+                                            'Chưa tiêm':'lightcyan',
+                                            'Đã tiêm hai mũi':'cyan',
+                                            'Đã tiêm 1 mũi':'royalblue',
+                                        },
+                                        width=650,
                                     ),
-                    style={'width': '500px'})
+                    )
         else: value = "Chưa đủ số liệu"
 
     return value

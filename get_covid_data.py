@@ -99,27 +99,24 @@ def get_hanoi_covid_data():
 def get_vaccine_data_vietnam_city():
     """
         Return a dataframe Vaccine data Vietnam city
+        Source: "https://vnexpress.net/covid-19/vaccine"
     """
     response = requests.get(
-        "https://vnexpress.net/microservice/sheet/type/vaccine_data_map")
+        "https://vnexpress.net/microservice/sheet/type/vaccine_data_vietnam_city")
     data_text = response.text
     buf = io.StringIO(data_text)
     df = pd.read_csv(buf, delimiter=",")
+    vietnam_vaccine_city = df[['fK', 'Tổng số dân trên 18 tuổi', 'Số người tiêm liều 1', 'Số người tiêm liều 2 ', 'Tỷ lệ tiêm', 'Tỷ lệ tiêm đủ liều']]
 
-    return df
+    vietnam_vaccine_city['Tỷ lệ tiêm'].replace(",", ".", inplace = True, regex = True)
+    vietnam_vaccine_city['Tỷ lệ tiêm'] = pd.to_numeric(vietnam_vaccine_city['Tỷ lệ tiêm'])
+    vietnam_vaccine_city['Tỷ lệ tiêm đủ liều'].replace(",", ".", inplace = True, regex = True)
+    vietnam_vaccine_city['Tỷ lệ tiêm đủ liều'] = pd.to_numeric(vietnam_vaccine_city['Tỷ lệ tiêm đủ liều'])
+
+    vietnam_vaccine_city['Tỷ lệ chưa tiêm'] = 100.0 - vietnam_vaccine_city['Tỷ lệ tiêm']
+    return vietnam_vaccine_city
 
 
-def get_vaccine_to_vietnam():
-    """
-        Return a dataframe Vaccine to Vietnam
-    """
-    response = requests.get(
-        "https://vnexpress.net/microservice/sheet/type/vaccine_to_vietnam")
-    data_text = response.text
-    buf = io.StringIO(data_text)
-    df = pd.read_csv(buf, delimiter=",")
-
-    return df
 
 
 def get_vaccine_data_vietnam():

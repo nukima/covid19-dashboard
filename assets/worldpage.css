@@ -12,9 +12,10 @@
     box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
 }
 #datatable-s2 > :nth-child(2) > div > :nth-child(1) > :nth-child(2) > table > tbody > :nth-child(1) > th {
+    font: 700 14px/32px arial;
     text-align: center;
-    background-color: black;
-    color: white;
+    background-color: #daf2e2;
+    color: #056625;
     font-weight: 600;
 }
 #datatable-s2 > :nth-child(2) > div > :nth-child(2) > :nth-child(2) > table > tbody > tr > td {
@@ -23,13 +24,13 @@
     transition: all 0.3s ease;
 }
 #datatable-s2 > :nth-child(2) > div > :nth-child(2) > :nth-child(2) > table > tbody > tr:hover > td {
-    background-color: rgb(65, 65, 65);
+    background-color: #617568;
     cursor: pointer;
     color: white;
 }
 
 #chart-box {
-    width: calc(100vw - 30px);
+    width: calc(100vw - 10px);
     display: flex;
     flex-wrap: wrap;
     justify-content:space-around;
@@ -42,7 +43,7 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
-    text-transform: uppercase;
+    text-transform: none;
     justify-items: center;
     
 }
@@ -57,7 +58,7 @@
 
 #bar-dropdown-s2{
     position: relative;
-    max-width: 700px;
+    max-width: 750px;
     font-weight: 600;
     left: 50px;
 }
@@ -82,5 +83,5 @@ input[type="checkbox"] {
 }
 
 input[type="checkbox"]:checked {
-	background-color: #555555;
+	background-color: #056625;
 }
