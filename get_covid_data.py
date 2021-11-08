@@ -38,7 +38,7 @@ def map_vn_data():
     cases=dff['cases'].sum()
     deaths=dff['death'].sum()    
     dff.rename(columns={"name":"Tỉnh thành","cases":"Số ca","death":"Tử vong","casesToday":"Số ca hôm nay"}, inplace=True)
-    return dff,nocases,cases,deaths
+    return dff,nocases,cases,deaths,today
     
 def get_world_covid_data():
     """

@@ -16,7 +16,7 @@ nav = create_navbar()
 
 # -----------------
 #Handle the data
-df,nocases,cases,deaths=map_vn_data()
+df,nocases,cases,deaths,today=map_vn_data()
 # -----------------
 
 
@@ -37,7 +37,8 @@ layout=html.Div([
         html.Div(str(deaths))
         ]),
         ]
-        )
+        ),
+        html.Div(["(Số liệu được cập nhật ngày "+today+")"],style={"fontFamily":"italic"})
     ], className= "totalDiv"),
     dash_table.DataTable(
         id='datatable-vietnam',
@@ -81,7 +82,7 @@ def update_graphs(slctd_row_indices):
     id=0
     if len(slctd_row_indices)>0:
         id=slctd_row_indices[-1]
-        zoom_idx=7
+        zoom_idx=10
     return dcc.Graph(id='MVN',figure=map_vietnam(id,zoom_idx))
 
 def map_vietnam(id,zoom_idx):
