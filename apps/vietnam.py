@@ -15,14 +15,26 @@ from app import app
 
 # -----------------
 # Get data
+
 today, total_data_df, today_data_df, overview_7days_df, city_data_df = get_vietnam_covid_data()
 time_series_vn = get_vietnam_covid_19_time_series()
 vietnam_vaccine_city = get_vaccine_data_vietnam_city()
-#linechart1
+vaccine_data_vietnam = get_vaccine_data_vietnam()
+#linechart1-data
 linechart_data_1 = time_series_vn[['Ngày', 'Số ca nhiễm']]
 linechart_data_1['MA50'] = linechart_data_1['Số ca nhiễm'].rolling(window=50).mean()
 linechart_data_1['MA200'] = linechart_data_1['Số ca nhiễm'].rolling(window=200).mean()
 linechart_data_1 = pd.melt(linechart_data_1, id_vars=['Ngày'], value_vars=['Số ca nhiễm', 'MA50', 'MA200'], var_name='Chú thích', value_name='Số ca')
+#linechart2-data
+linechart_data_2 = time_series_vn[['Ngày', 'Tử vong']]
+linechart_data_2['MA50'] = linechart_data_2['Tử vong'].rolling(window=50).mean()
+linechart_data_2['MA200'] = linechart_data_2['Tử vong'].rolling(window=200).mean()
+linechart_data_2 = pd.melt(linechart_data_2, id_vars=['Ngày'], value_vars=['Tử vong', 'MA50', 'MA200'], var_name='Chú thích', value_name='Số ca')
+#linechart3-data
+vaccine_data_vietnam['MA50'] = vaccine_data_vietnam['Tổng số người đã tiêm'].rolling(window=50).mean()
+vaccine_data_vietnam['MA200'] = vaccine_data_vietnam['Tổng số người đã tiêm'].rolling(window=200).mean()
+vaccine_data_vietnam = pd.melt(vaccine_data_vietnam, id_vars=['Thời gian'], value_vars=['Tổng số người đã tiêm', 'MA50', 'MA200'], var_name='Chú thích', value_name='Số người')
+
 #horizion data
 dff = city_data_df[['name', 'death', 'cases']]
 dff = pd.melt(dff, id_vars=['name'], value_vars=['death', 'cases'], var_name='status', value_name='test')
@@ -48,6 +60,7 @@ tab_selected_style = {
 #layout
 layout = html.Div([
     dcc.Tabs([
+        #linechart so ca nhiem
         dcc.Tab(label='Số ca nhiễm', children=[
             dcc.Graph(
                 id='linechart1-s3',
@@ -57,34 +70,39 @@ layout = html.Div([
                     y='Số ca',
                     color='Chú thích',
                     title='Số liệu thống kê',
-                    template='ggplot2',
                 )
-            )
+            ),
+            html.A("Nguồn: JHU CSSE COVID-19 Data", href='https://github.com/CSSEGISandData/COVID-19', target="_blank"),
         ], style=tab_style, selected_style=tab_selected_style,
         ),
+        #linechart so ca tu vong
         dcc.Tab(label='Tử vong', children=[
             dcc.Graph(
                 id='linechart2-s3',
                 figure=px.line(
-                    data_frame=time_series_vn,
+                    data_frame=linechart_data_2,
                     x='Ngày',
-                    y='Tử vong',
+                    y='Số ca',
+                    color='Chú thích',
                     title='Số liệu thống kê',
                 )
-            )
+            ),
+            html.A("Nguồn: JHU CSSE COVID-19 Data", href='https://github.com/CSSEGISandData/COVID-19', target="_blank"),
         ], style=tab_style, selected_style=tab_selected_style
         ),
+        #linechart vaccine
         dcc.Tab(label='Vaccine', children=[
             dcc.Graph(
-                figure={
-                    'data': [
-                        {'x': [1, 2, 3], 'y': [2, 4, 3],
-                            'type': 'bar', 'name': 'SF'},
-                        {'x': [1, 2, 3], 'y': [5, 4, 3],
-                         'type': 'bar', 'name': u'Montréal'},
-                    ]
-                }
-            )
+                id='linechart3-s3',
+                figure=px.line(
+                    data_frame=vaccine_data_vietnam,
+                    x='Thời gian',
+                    y='Số người',
+                    color='Chú thích',
+                    title='Số liệu thống kê',
+                )
+            ),
+            html.A("Nguồn: Bộ Y Tế", href='https://vnexpress.net/covid-19/vaccine', target="_blank"),
         ], style=tab_style, selected_style=tab_selected_style
         ),
     ]),
@@ -138,6 +156,7 @@ layout = html.Div([
                 fixed_rows={'headers': True, 'data': 0},
                 virtualization=True,
             ),
+            html.A("Nguồn: Bộ Y tế", href='https://vnexpress.net/covid-19/vaccine', target="_blank"),
             f"Cập nhật ngày {today}",
     ]),
     # horizontal bar chart

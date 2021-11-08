@@ -133,8 +133,11 @@ def get_vaccine_data_vietnam():
     data_text = response.text
     buf = io.StringIO(data_text)
     df = pd.read_csv(buf, delimiter=",")
-
-    return df
+    vaccine_data_vietnam = df[['Ngày', 'Tổng số người đã tiêm']]
+    vaccine_data_vietnam.dropna(axis=0, thresh=2, inplace=True)
+    date = pd.date_range("2021-03-07", periods=len(vaccine_data_vietnam), freq="D")
+    vaccine_data_vietnam['Thời gian'] = date
+    return vaccine_data_vietnam
 
 def get_vietnam_covid_19_time_series():
     '''

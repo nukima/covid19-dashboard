@@ -1,0 +1,1 @@
+html.A("Source Code: Github", href='https://github.com/nukima/covid19-dashboard', target="_blank")

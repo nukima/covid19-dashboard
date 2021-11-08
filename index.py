@@ -26,12 +26,12 @@ app.layout = html.Div([
     html.Div(id='page-content', children=[]),
     html.Div(
         [
-        html.Div(
-        [
-            html.Div("Đề tài thực hiện bởi nhóm 3"),
-            html.Div("Thành viên: Dương Văn Giang, Nguyễn Kim Mạnh, Nguyễn Phương Nam"),
-            html.A("Source Code: Github", href='https://github.com/nukima/covid19-dashboard', target="_blank")
-        ])
+            html.Div(
+            [
+                html.Div("Đề tài thực hiện bởi nhóm 3"),
+                html.Div("Thành viên: Dương Văn Giang, Nguyễn Kim Mạnh, Nguyễn Phương Nam"),
+                html.A("Source Code: Github", href='https://github.com/nukima/covid19-dashboard', target="_blank")
+            ])
         ]
     , id = "footer")
 ])
