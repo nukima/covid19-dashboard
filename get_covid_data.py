@@ -117,6 +117,7 @@ def get_vaccine_data_vietnam_city():
     vietnam_vaccine_city['Tỷ lệ tiêm đủ liều'].replace(",", ".", inplace = True, regex = True)
     vietnam_vaccine_city['Tỷ lệ tiêm đủ liều'] = pd.to_numeric(vietnam_vaccine_city['Tỷ lệ tiêm đủ liều'])
 
+    vietnam_vaccine_city['Tỷ lệ tiêm 1 mũi'] = vietnam_vaccine_city['Tỷ lệ tiêm'] - vietnam_vaccine_city['Tỷ lệ tiêm đủ liều']
     vietnam_vaccine_city['Tỷ lệ chưa tiêm'] = 100.0 - vietnam_vaccine_city['Tỷ lệ tiêm']
     return vietnam_vaccine_city
 

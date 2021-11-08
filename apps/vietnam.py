@@ -15,7 +15,6 @@ from app import app
 
 # -----------------
 # Get data
-
 today, total_data_df, today_data_df, overview_7days_df, city_data_df = get_vietnam_covid_data()
 time_series_vn = get_vietnam_covid_19_time_series()
 vietnam_vaccine_city = get_vaccine_data_vietnam_city()
@@ -32,8 +31,8 @@ linechart_data_2['MA200'] = linechart_data_2['Tử vong'].rolling(window=200).me
 linechart_data_2 = pd.melt(linechart_data_2, id_vars=['Ngày'], value_vars=['Tử vong', 'MA50', 'MA200'], var_name='Chú thích', value_name='Số ca')
 #linechart3-data
 vaccine_data_vietnam['MA50'] = vaccine_data_vietnam['Tổng số người đã tiêm'].rolling(window=50).mean()
-vaccine_data_vietnam['MA200'] = vaccine_data_vietnam['Tổng số người đã tiêm'].rolling(window=200).mean()
-vaccine_data_vietnam = pd.melt(vaccine_data_vietnam, id_vars=['Thời gian'], value_vars=['Tổng số người đã tiêm', 'MA50', 'MA200'], var_name='Chú thích', value_name='Số người')
+vaccine_data_vietnam['MA100'] = vaccine_data_vietnam['Tổng số người đã tiêm'].rolling(window=100).mean()
+vaccine_data_vietnam = pd.melt(vaccine_data_vietnam, id_vars=['Thời gian'], value_vars=['Tổng số người đã tiêm', 'MA50', 'MA100'], var_name='Chú thích', value_name='Số người')
 
 #horizion data
 dff = city_data_df[['name', 'death', 'cases']]
@@ -157,27 +156,44 @@ layout = html.Div([
                 virtualization=True,
             ),
             html.A("Nguồn: Bộ Y tế", href='https://vnexpress.net/covid-19/vaccine', target="_blank"),
-            f"Cập nhật ngày {today}",
     ]),
     # horizontal bar chart
     html.Div(
         id ='horizontal-barchart-s3',
-        children=[
-            dcc.Graph(
-            figure=px.bar(
-                data_frame=dff,
-                x='test',
-                y='name',
-                color='status',
-                orientation='h',
-                title='City Viet Nam',
-                height= 650,
-            ),
-            
-        )
-        ],
-        
+        children=[],        
     )])
     
 ], id = "vietnam-page")
 #-------------
+#callback
+@app.callback(
+    Output('horizontal-barchart-s3', 'children'),
+    [   
+        Input('datatable-s3', 'derived_virtual_data'),
+        Input('datatable-s3', 'derived_virtual_selected_rows'),
+    ]
+)
+def update_horizontal_barchart(all_rows_data, slctd_row_indices,):
+    dff = pd.DataFrame(all_rows_data)
+    if not slctd_row_indices:
+        slctd_row_indices = dff.index
+    print(slctd_row_indices)
+    print(dff)
+    city_name = dff.iloc[slctd_row_indices, :]['fK']
+    h_barchart_data = vietnam_vaccine_city[vietnam_vaccine_city['fK'].isin(city_name)][['fK','Tỷ lệ tiêm đủ liều', 'Tỷ lệ chưa tiêm', 'Tỷ lệ tiêm 1 mũi']]
+    h_barchart_data = pd.melt(h_barchart_data, id_vars=['fK'], value_vars=['Tỷ lệ tiêm đủ liều', 'Tỷ lệ tiêm 1 mũi','Tỷ lệ chưa tiêm' ], var_name='Chú thích', value_name='Tỷ lệ %')
+    return dcc.Graph(
+            figure=px.bar(
+                data_frame=h_barchart_data,
+                x='Tỷ lệ %',
+                y='fK',
+                color='Chú thích',
+                orientation='h',
+                title='So sánh tình trạng tiêm vaccine của các tỉnh/thành phố trong bảng bên',
+                labels={'fK':'Tỉnh'},
+                height= 650,
+                ),            
+            )
+
+    
+
