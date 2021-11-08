@@ -22,11 +22,17 @@
     text-transform: uppercase;
     text-align: center;
 }
+#datatable-vietnam .cell-table > tbody span {
+    font-size: 11px;
+}
 #datatable-world .cell-table > tbody > :nth-child(1),
 #datatable-vietnam .cell-table > tbody > :nth-child(1) {
     color: #056625;
     background-color: #daf2e2;
     height: 30px;
+}
+#datatable-vietnam .cell-table > tbody > :nth-child(1) {
+    
 }
 #datatable-world .cell-table > tbody > :nth-child(1):hover > *,
 #datatable-world .cell-table > tbody > :nth-child(2):hover > *,
@@ -105,10 +111,14 @@
 }
 
 /* size of map */
-#mapv,
+
 #mapw {
     height: 733px;
     width: calc(100vw - 30px - 400px - 30px);
+}
+#mapv {
+    height: 733px;
+    width: calc(100vw - 30px - 500px - 30px);
 }
 #mapv > #MVN,
 #mapw > #MW {
