@@ -49,7 +49,6 @@ layout = html.Div([
                     x='Ngày',
                     y='Số ca nhiễm',
                     template='seaborn',
-                    height=650,
                 )
             )
         ], style=tab_style, selected_style=tab_selected_style,
@@ -62,7 +61,6 @@ layout = html.Div([
                     x='Ngày',
                     y='Tử vong',
                     template='seaborn',
-                    height=650,
                 )
             )
         ], style=tab_style, selected_style=tab_selected_style
@@ -102,18 +100,15 @@ layout = html.Div([
                      "deletable": False, "selectable": False},
                     {"name": 'Ca nhiếm mới hôm nay', "id": 'casesToday',
                      "deletable": False, "selectable": False},
-                    # {"name": 'Đã tiêm vaccine', "id": 'people_vaccinated',
-                    #  "deletable": False, "selectable": False},
-                    # {"name": 'Cập nhật', "id": 'last_updated_date',
-                    #  "deletable": False, "selectable": False},
                 ],
+                page_action='none',
                 editable=False,
                 filter_action="native",
                 sort_action="native",
                 sort_mode="single",
-                row_selectable="single",
+                row_selectable="multi",
                 row_deletable=False,
-                style_table={'height': '350px'},
+                style_table={'height': '650'},
                 fixed_rows={'headers': True, 'data': 0},
                 virtualization=True,
             ),
@@ -130,8 +125,10 @@ layout = html.Div([
                 y='name',
                 color='status',
                 orientation='h',
-                title='City Viet Nam'
-            )
+                title='City Viet Nam',
+                height= 650,
+            ),
+            
         )
         ],
         
