@@ -2,8 +2,8 @@
 #vietnam-page > #undefined-parent {
     opacity: 0;
     animation: home_ani 0.5s forwards;
-    padding: 100px;
-    height: calc(100vh - 63px);
+    padding: 50px;
+    height: 70vh;
 }
 #vietnam-page > :nth-child(3) {
     height: 100vh;
