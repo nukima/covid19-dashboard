@@ -3,6 +3,7 @@ import plotly.express as px
 import requests
 import dash
 from dash import dash_table
+from dash.dash_table.Format import Format, Group
 from dash import dcc  # create interactive components
 from dash import html  # access html tags
 from dash.dependencies import Input, Output
@@ -16,7 +17,7 @@ nav = create_navbar()
 
 # -----------------
 #Handle the data
-df,nocases,cases,deaths,today=map_vn_data()
+df,nocases,cases,deaths,today,casesToday=map_vn_data()
 # -----------------
 
 
@@ -36,6 +37,10 @@ layout=html.Div([
         html.Div("Tổng số ca tử vong: "),
         html.Div("{:,}".format(deaths))
         ]),
+        html.Div([
+        html.Div("Số ca mới hôm nay: "),
+        html.Div("{:,}".format(casesToday))
+        ]),
         ]
         ),
         html.Div(["(Số liệu được cập nhật ngày "+today+")"],style={"fontFamily":"italic"})
@@ -43,9 +48,14 @@ layout=html.Div([
     dash_table.DataTable(
         id='datatable-vietnam',
         columns=[
-            {'name': i, 'id': i, 'deletable': False} for i in df.columns
-            # omit the id column
-            if i != 'id' and i!="index" and i not in ["treating","recovered","lat","lng"]
+            # {'name': i, 'id': i, 'deletable': False} for i in df.columns
+            # # omit the id column
+            # if i != 'id' and i!="index" and i not in ["treating","recovered","lat","lng"]
+            dict(id='Tỉnh thành', name='Tỉnh thành'), 
+            dict(id='Số ca', name='Số ca', type='numeric', format=Format().group(True)), 
+            dict(id='Tử vong', name='Tử vong', type='numeric', format=Format().group(True)), 
+            dict(id='Số ca hôm nay', name='Số ca hôm nay', type='numeric', format=Format().group(True)), 
+                       
         ],
         style_data_conditional=[                
         {

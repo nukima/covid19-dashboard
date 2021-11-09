@@ -2,6 +2,7 @@ import pandas as pd  # organize the data
 import plotly.express as px
 import dash
 from dash import dash_table
+from dash.dash_table.Format import Format, Group
 from dash import dcc  # create interactive components
 from dash import html  # access html tags
 from dash.dependencies import Input, Output
@@ -42,9 +43,13 @@ layout=html.Div([
     dash_table.DataTable(
         id='datatable-world',
         columns=[
-            {'name': i, 'id': i, 'deletable': False} for i in dff.columns
-            # omit the id column
-            if i != 'id' and i!="index"
+            # {'name': i, 'id': i, 'deletable': False} for i in dff.columns
+            # # omit the id column
+            # if i != 'id' and i!="index"
+            {"name":"Quốc gia","id":"Quốc gia"},
+            dict(id='Số ca', name='Số ca', type='numeric', format=Format().group(True)), 
+            dict(id='Tử vong', name='Tử vong', type='numeric', format=Format().group(True)), 
+            {"name":"Tỉ lệ tử vong","id":"Tỉ lệ tử vong"},  
         ],
         data=dff.to_dict('records'),
         # editable=False,
