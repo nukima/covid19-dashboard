@@ -76,19 +76,24 @@ layout=html.Div([
 )
 
 def update_graphs(slctd_row_indices):
+    centerlat=16.06944
+    centerlon=108.20972
     zoom_idx=5
     if slctd_row_indices is None:
         slctd_row_indices=[]
     id=0
     if len(slctd_row_indices)>0:
         id=slctd_row_indices[-1]
-        zoom_idx=10
-    return dcc.Graph(id='MVN',figure=map_vietnam(id,zoom_idx))
+        zoom_idx=9
+        centerlat=df.at[id,"lat"]
+        centerlon=df.at[id,"lng"]  
+    return dcc.Graph(id='MVN',figure=map_vietnam(id,zoom_idx,centerlat,centerlon))
 
-def map_vietnam(id,zoom_idx):
+def map_vietnam(id,zoom_idx,centerlat,centerlon):
     fig = px.scatter_mapbox(df, lat="lat", lon="lng",hover_data={"Số ca":True,"Số ca hôm nay":True,"lat":False,"lng":False},hover_name="Tỉnh thành", size=nocases,color="Số ca",
-                            color_continuous_scale=px.colors.diverging.Tealrose, zoom=zoom_idx,
-                            center={"lat":df.at[id,"lat"],"lon":df.at[id,"lng"]})
+                            color_continuous_scale=px.colors.diverging.Temps,
+                            zoom=zoom_idx, opacity=0.9,
+                            center={"lat":centerlat,"lon":centerlon})
     fig.update_layout(mapbox_style="carto-positron")
     fig.update_layout(clickmode="select")
     fig.update_layout(margin={"r":0,"t":0,"l":0,"b":0})

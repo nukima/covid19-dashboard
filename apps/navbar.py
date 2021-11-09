@@ -29,7 +29,7 @@ def create_navbar():
         sticky="top",  # Stick it to the top... like Spider Man crawling on the ceiling?
         color="#3da05b",  # Change this to change color of the navbar e.g. "primary", "secondary" etc.
         dark=True,  # Change this to change color of text within the navbar (False for light text)
-        brand_style={"fontSize":32,"fontWeight":600,"fontStyle":"Lato"}
+        brand_style={"fontSize":32,"fontWeight":600,"fontStyle":"Lato"},
     )
 
     return navbar
