@@ -212,7 +212,7 @@ def update_horizontal_barchart(all_rows_data, slctd_row_indices,):
                     'Tỷ lệ tiêm 1 mũi':'#84e83c',
                 },
                 orientation='h',
-                title='Tình trạng tiêm vaccine của các tỉnh/thành phố trong bảng bên',
+                title='Tình hình tiêm vaccine của các tỉnh/thành phố trong bảng bên',
                 labels={'fK':'Tỉnh/Thành phố'},
                 height= 650,
                 ),            
