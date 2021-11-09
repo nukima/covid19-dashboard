@@ -30,11 +30,11 @@ layout=html.Div([
         html.Div([
         html.Div([
         html.Div("Tổng số ca nhiễm: "),
-        html.Div(str(cases))
+        html.Div("{:,}".format(cases))
         ]),
         html.Div([
         html.Div("Tổng số ca tử vong: "),
-        html.Div(str(deaths))
+        html.Div("{:,}".format(deaths))
         ])
         ])
     ], className= "totalDiv"),
