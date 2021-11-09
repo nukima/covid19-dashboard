@@ -209,7 +209,7 @@ def piechart_update(all_rows_data, slctd_row_indices,):
                     figure = px.pie(
                                         data_frame= piechart_data, names='Trạng thái', values='Số người',
                                         color='Trạng thái',
-                                        hole=0.3, title=f"Tình trạng tiêm vaccine ở {country_name}",
+                                        hole=0.3, title=f"Tình hình tiêm vaccine ở {country_name}",
                                         color_discrete_map={
                                             'Chưa tiêm':'#58b093',
                                             'Đã tiêm hai mũi':'#056625',
