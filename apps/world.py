@@ -1,31 +1,28 @@
-# import dash
+# dependencies 
 import dash_html_components as html
 from dash import dcc
 import dash_table
-from dash_table.Format import Format, Group
+from dash_table.Format import Format
 from dash.dependencies import Input, Output
-#plotly
-import plotly.express as px
-#pandas
-import pandas as pd
-#module data
-from get_covid_data import *
-#app
-from app import app
-#navbar
-from .navbar import create_navbar
+import plotly.express as px #plotly
+import pandas as pd #pandas
 
-nav = create_navbar()
+
+from get_covid_data import get_world_covid_data #module data
+from app import app #app
+from .navbar import create_navbar #navbar
+
+
 # -----------------
-# Get data
+# Local object
+# nav bar
+nav = create_navbar()
 world_data = get_world_covid_data()
 # ---------------------
 
-#world layout
+#-------------
+#layout
 layout = html.Div([
-    # World Section 
-    # html.Div([
-        # dropdown continent
         nav,
         html.Div([
             dcc.Checklist(
@@ -68,7 +65,6 @@ layout = html.Div([
                     {'if': {'column_id': 'last_updated_date'},
                     'width': '18%', 'textAlign': 'center'},
                 ],  
-                # data=[{}],
                 columns=[
                     {"name": 'Châu lục', "id": 'continent',
                      "deletable": False, "selectable": False},
@@ -110,11 +106,7 @@ layout = html.Div([
             html.Div([
             html.Div(id='piechart-s2')
             ])
-            # dcc.Graph(id='barchart-s2'),
-            # html.Div(id='piechart-s2'),
         ] , id= "chart-box"),
-
-    # ])
 
 ], className="main", id = "world-page")
 

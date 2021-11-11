@@ -1,3 +1,4 @@
+/* table */
 #datatable-world .cell-table,
 #datatable-vietnam  .cell-table {
     font-family: 'Roboto', sans-serif;
@@ -27,7 +28,6 @@
 #datatable-vietnam .cell-table > tbody > :nth-child(1),
 #datatable-world .cell-table > tbody > :nth-child(2),
 #datatable-vietnam .cell-table > tbody > :nth-child(2) {
-    /* color: #056625; */
     background-color: #daf2e2;
     height: 30px;
 }
@@ -36,7 +36,6 @@
 #datatable-vietnam .dt-table-container__row-1 .cell-table > tbody > :nth-child(1):hover > *,
 #datatable-vietnam .dt-table-container__row-1 .cell-table > tbody > :nth-child(2):hover > *   {
     background-color: rgb(68, 68, 68);
-    /* color: rgb(0, 0, 0); */
 } 
 #datatable-world .cell-table > tbody > tr > th,
 #datatable-vietnam .cell-table > tbody > tr > th{
@@ -51,10 +50,14 @@
 #datatable-world .dt-table-container__row-1 .cell-table > tbody > tr > :nth-child(3) {
     color: red;
 }
-/* #datatable-world .cell-table > tbody > :nth-child(1) > :nth-child(3) {
+
+/*head table */
+#datatable-world .dt-table-container__row-0 > :nth-child(2) > table > tbody > tr,
+#datatable-vietnam .dt-table-container__row-0 > :nth-child(2) > table > tbody > tr {
     color: #056625;
-} */
-/* style layout */
+}
+
+/* style overview layout page */
 #home-content {
     width: calc(100vw - 15px);
 }
@@ -70,7 +73,7 @@
     animation: home_ani 1.5s forwards;
 }
 
-/* style total info */
+/* overview cases*/
 #map_world,
 #map_vn {
     width: calc(100vw - 30px);
@@ -107,7 +110,7 @@
     color: red;
 }
 
-/* size of map */
+/* map */
 
 #mapw {
     height: 733px;
@@ -122,12 +125,7 @@
     height: 733px;
 }
 
-/* seting head table */
 
-#datatable-world .dt-table-container__row-0 > :nth-child(2) > table > tbody > tr,
-#datatable-vietnam .dt-table-container__row-0 > :nth-child(2) > table > tbody > tr {
-    color: #056625;
-}
 /* mobile config */
 @media (max-width: 900px) {
     #map_world,

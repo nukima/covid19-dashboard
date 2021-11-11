@@ -1,13 +1,18 @@
+# dependencies 
 # This Python file uses the following encoding: utf-8
 import numpy as np
 from numpy import NaN
 import pandas as pd
 import requests
-from bs4 import BeautifulSoup
 import io
 import json
 
 def map_world_data():
+    """
+        Get World data
+        @Parameter: none
+        @return: dff, cases, deaths  (dataframe type)
+    """
     url="https://services1.arcgis.com/0MSEUqKaxRlEPj5g/arcgis/rest/services/ncov_cases2_v1/FeatureServer/2/query?where=1%3D1&outFields=Country_Region,Confirmed,Deaths,Mortality_Rate,ISO3&returnGeometry=false&outSR=4326&f=json"
     rq=requests.get(url).text
     data=json.loads(rq)
@@ -20,6 +25,11 @@ def map_world_data():
     return dff,cases,deaths
 
 def map_vn_data():
+    """
+        Get VIETNAM COVID data
+        @parameter: none
+        @return: dff, nocases, cases, deaths, today, casesToday (dataframe type)
+    """
     today, total_data_df, today_data_df, overview_7days_df, city_data_df=get_vietnam_covid_data()
     url="https://raw.githubusercontent.com/namnguyen215/dataset/main/vn_location.json"
     rq=requests.get(url).text

@@ -8,6 +8,7 @@
 body {
     font-family: 'Roboto', sans-serif;
 }
+/* scroll bar */
 ::-webkit-scrollbar-track
 {
 	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
@@ -27,6 +28,7 @@ body {
     border-radius: 15px;
 }
 
+/* animation page */
 @keyframes home_ani {
     0% {
         opacity: 0;
@@ -37,6 +39,18 @@ body {
     100% {
         opacity: 1;
     }
+}
+input[type="checkbox"] {
+	appearance: none;
+	width: 20px;
+	height: 20px;
+	border: 2px solid #555555;
+	background-clip: content-box;
+	padding: 3px;
+}
+
+input[type="checkbox"]:checked {
+	background-color: #056625;
 }
 tbody{
     color: black;

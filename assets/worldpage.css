@@ -8,10 +8,7 @@
 }
 #world-page > :nth-child(4){
     font-family: 'Roboto', sans-serif;
-    /* margin: auto; */
     max-width: calc(100% * 0.8);
-    /* margin: auto; */
-    /* max-height: 300px; */
     margin: 10px 10%;
     box-shadow: rgb(82 255 0 / 25%) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
 }
@@ -40,10 +37,6 @@
     flex-wrap: wrap;
     justify-content:space-around;
 }
-/* #chart-box > div {
-    margin: 40px 40px;
-    box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
-}*/
 #chart-box > :nth-child(2) {
     display: flex;
     flex-direction: column;
@@ -59,7 +52,6 @@
     text-align: center;
     font-weight: 600;
 } 
-
 
 #bar-dropdown-s2{
     position: relative;
@@ -78,16 +70,4 @@
     font-size: 28px;
     padding: 15px;
     font-weight: 600;
-}
-input[type="checkbox"] {
-	appearance: none;
-	width: 20px;
-	height: 20px;
-	border: 2px solid #555555;
-	background-clip: content-box;
-	padding: 3px;
-}
-
-input[type="checkbox"]:checked {
-	background-color: #056625;
 }

@@ -1,17 +1,16 @@
-from os import path
+# dependencies 
 from dash import dcc
 import dash_html_components as html
 from dash.dependencies import Input, Output
 
 # Connect to main app.py file
 from app import app
-from app import server
 
 # Connect to app pages
 from apps import world, vietnam, map_vn,map_world
 
 
-# first section layout
+# layout
 app.layout = html.Div([
     dcc.Location(id='url', refresh=False),
     html.Div(id='page-content', children=[]),
@@ -29,7 +28,7 @@ app.layout = html.Div([
 
 
 #------------------
-#callback
+# navbar-callback
 @app.callback(Output('page-content', 'children'),
               [Input('url', 'pathname')])
 def display_page(pathname):
