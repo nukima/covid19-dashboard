@@ -167,6 +167,7 @@ def update_barchart(continent_selected, all_rows_data, barchart_xaxis, slctd_row
                 "people_vaccinated_per_hundred" : "Đã tiêm vaccine (ít nhất 1 mũi) / triệu dân",
                 "total_deaths_per_million":"Ca tử vong / triệu dân"},
         width= 800,
+        height = 750,
     )
     barchart.update_layout(yaxis={'categoryorder':'total ascending'})
     if slctd_row_indices != None:
@@ -216,6 +217,7 @@ def piechart_update(all_rows_data, slctd_row_indices,):
                                             'Đã tiêm 1 mũi':'#84e83c',
                                         },
                                         width=650,
+                                        height = 750,
                                     ),
                     )
         else: value = "Chưa đủ số liệu"
