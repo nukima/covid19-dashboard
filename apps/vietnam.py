@@ -3,9 +3,7 @@ from dash import html, dcc, dash_table
 from dash.dependencies import Input, Output    
 import plotly.express as px #plotly
 import pandas as pd #pandas
-
-
-
+from dash_table.Format import Format
 
 from get_covid_data import  get_vietnam_covid_data, get_vietnam_covid_19_time_series, get_vaccine_data_vietnam_city, get_vaccine_data_vietnam #module data
 from app import app #app
@@ -39,9 +37,6 @@ vaccine_data_vietnam['MA50'] = vaccine_data_vietnam['Tổng số người đã t
 vaccine_data_vietnam['MA100'] = vaccine_data_vietnam['Tổng số người đã tiêm'].rolling(window=100).mean()
 vaccine_data_vietnam = pd.melt(vaccine_data_vietnam, id_vars=['Thời gian'], value_vars=['Tổng số người đã tiêm', 'MA50', 'MA100'], var_name='Chú thích', value_name='Số người')
 
-#horizion data
-dff = city_data_df[['name', 'death', 'cases']]
-dff = pd.melt(dff, id_vars=['name'], value_vars=['death', 'cases'], var_name='status', value_name='test')
 #-----------------
 
 # tab style
@@ -155,12 +150,9 @@ layout = html.Div([
                 columns=[
                     {"name": 'Thành phố', "id": 'fK',
                      "deletable": False, "selectable": False},
-                    {"name": 'Dân số >= 18 tuổi', "id": 'Tổng số dân trên 18 tuổi',
-                     "deletable": False, "selectable": False},
-                    {"name": 'Đã tiêm liều 1', "id": 'Số người tiêm liều 1',
-                     "deletable": False, "selectable": False},
-                    {"name": 'Đã tiêm liều 2 ', "id": 'Số người tiêm liều 2 ',
-                     "deletable": False, "selectable": False},
+                    dict(id='Tổng số dân trên 18 tuổi', name='Dân số >= 18 tuổi', type='numeric', format=Format().group(True)) ,
+                    dict(id='Số người tiêm liều 1', name='Đã tiêm liều 1', type='numeric', format=Format().group(True)) ,
+                    dict(id='Số người tiêm liều 2 ', name='Đã tiêm liều 2 ', type='numeric', format=Format().group(True)) ,
                     {"name": 'Tỷ lệ tiêm (%)', "id": 'Tỷ lệ tiêm',
                      "deletable": False, "selectable": False},
                     {"name": 'Tỷ lệ tiêm đủ liều (%)', "id": 'Tỷ lệ tiêm đủ liều',
@@ -187,7 +179,7 @@ layout = html.Div([
     
 ], id = "vietnam-page")
 #-------------
-#callback
+#datatable => barchart
 @app.callback(
     Output('horizontal-barchart-s3', 'children'),
     [   

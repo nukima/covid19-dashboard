@@ -13,7 +13,6 @@ def map_world_data():
     data=json.loads(rq)
     df=pd.json_normalize(data["features"])
     df.rename(columns={'attributes.Country_Region': 'Quốc gia', 'attributes.Confirmed': 'Số ca','attributes.Deaths':'Tử vong','attributes.Mortality_Rate':'Tỉ lệ tử vong','attributes.ISO3':'id'}, inplace=True)
-    df['Tỉ lệ tử vong'] = df['Tỉ lệ tử vong'].map('{:,.2f}'.format)
     df.set_index('id', inplace=True, drop=False)
     dff=df.sort_values(by=['Số ca'],ascending=False)
     cases=dff['Số ca'].sum()
@@ -35,9 +34,9 @@ def map_vn_data():
             nocases.append(0)
         else:
             nocases.append(np.log2(x))
-    cases=dff['cases'].sum()
-    deaths=dff['death'].sum()    
-    casesToday=dff['casesToday'].sum()
+    cases=total_data_df.internal['cases']
+    deaths=total_data_df.internal['death']  
+    casesToday=today_data_df.internal['cases']
     dff.rename(columns={"name":"Tỉnh thành","cases":"Số ca","death":"Tử vong","casesToday":"Số ca hôm nay"}, inplace=True)
     return dff,nocases,cases,deaths,today,casesToday
     
@@ -173,7 +172,3 @@ def get_vietnam_covid_19_time_series():
 
     return time_series_vn
 
-
-
-if __name__ == "__main__":
-    msg = 'hello'

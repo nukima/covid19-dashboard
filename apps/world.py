@@ -1,8 +1,8 @@
 # import dash
-from dash.html.Br import Br
-from dash import html
+import dash_html_components as html
 from dash import dcc
-from dash import dash_table
+import dash_table
+from dash_table.Format import Format, Group
 from dash.dependencies import Input, Output
 #plotly
 import plotly.express as px
@@ -74,19 +74,16 @@ layout = html.Div([
                      "deletable": False, "selectable": False},
                     {"name": 'Quốc gia', "id": 'location',
                      "deletable": False, "selectable": False},
-                    {"name": 'Số ca nhiễm', "id": 'total_cases',
-                     "deletable": False, "selectable": False},
-                    {"name": 'Tử vong', "id": 'total_deaths',
-                     "deletable": False, "selectable": False},
-                    {"name": 'Đã tiêm vaccine', "id": 'people_vaccinated',
-                     "deletable": False, "selectable": False},
+                    dict(id='total_cases', name='Số ca nhiễm', type='numeric', format=Format().group(True)) ,
+                    dict(id='total_deaths', name='Tử vong', type='numeric', format=Format().group(True)) ,
+                    dict(id='people_vaccinated', name='Đã tiêm vaccine', type='numeric', format=Format().group(True)) ,
                     {"name": 'Cập nhật', "id": 'last_updated_date',
                      "deletable": False, "selectable": False},
                 ],
                 editable=False,
                 filter_action="native",
                 sort_action="native",
-                sort_mode="single",
+                sort_mode="multi",
                 row_selectable="single",
                 row_deletable=False,
                 style_table={'height': '350px'},
@@ -167,6 +164,7 @@ def update_barchart(continent_selected, all_rows_data, barchart_xaxis, slctd_row
                 "people_vaccinated_per_hundred" : "Đã tiêm vaccine (ít nhất 1 mũi) / triệu dân",
                 "total_deaths_per_million":"Ca tử vong / triệu dân"},
         width= 800,
+        height = 750,
     )
     barchart.update_layout(yaxis={'categoryorder':'total ascending'})
     if slctd_row_indices != None:
@@ -175,17 +173,14 @@ def update_barchart(continent_selected, all_rows_data, barchart_xaxis, slctd_row
         barchart.update_traces(marker_color=colors)
 
     return (barchart, )
-#datatable highlight selected_row -> piechart country
+#datatable -> piechart country
 @app.callback(
-    # [   Output('datatable-s2', 'style_data_conditional'), 
        Output('piechart-s2', 'children'),
-    # [   Input('datatable-s2', 'derived_viewport_selected_rows'),
     [   Input('datatable-s2', 'derived_virtual_data'),
         Input('datatable-s2', 'derived_virtual_selected_rows'),
     ]
 )
 def piechart_update(all_rows_data, slctd_row_indices,):
-    #piechart
     dff = pd.DataFrame(all_rows_data)
     if not slctd_row_indices:
         value = html.P("Chọn một quốc gia trên bảng")
@@ -216,6 +211,7 @@ def piechart_update(all_rows_data, slctd_row_indices,):
                                             'Đã tiêm 1 mũi':'#84e83c',
                                         },
                                         width=650,
+                                        height = 750,
                                     ),
                     )
         else: value = "Chưa đủ số liệu"
