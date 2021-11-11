@@ -48,9 +48,6 @@ layout=html.Div([
     dash_table.DataTable(
         id='datatable-vietnam',
         columns=[
-            # {'name': i, 'id': i, 'deletable': False} for i in df.columns
-            # # omit the id column
-            # if i != 'id' and i!="index" and i not in ["treating","recovered","lat","lng"]
             dict(id='Tỉnh thành', name='Tỉnh thành'), 
             dict(id='Số ca', name='Số ca', type='numeric', format=Format().group(True)), 
             dict(id='Tử vong', name='Tử vong', type='numeric', format=Format().group(True)), 
@@ -68,7 +65,7 @@ layout=html.Div([
         filter_action="native",
         sort_action="native",
         sort_mode='multi',
-        row_selectable='multi',
+        row_selectable='single',
         row_deletable=False,
         style_table={'height': '600px', 'overflowY': 'auto', "width": "500px"},
         style_header={

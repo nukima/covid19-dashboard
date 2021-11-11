@@ -49,7 +49,7 @@ layout=html.Div([
             {"name":"Quốc gia","id":"Quốc gia"},
             dict(id='Số ca', name='Số ca', type='numeric', format=Format().group(True)), 
             dict(id='Tử vong', name='Tử vong', type='numeric', format=Format().group(True)), 
-            {"name":"Tỉ lệ tử vong","id":"Tỉ lệ tử vong"},  
+            dict(id='Tỉ lệ tử vong', name='Tử vong', type='numeric',format=Format(precision=3)),     
         ],
         data=dff.to_dict('records'),
         # editable=False,
@@ -100,7 +100,7 @@ def map_world(dff2):
 
     fig=px.choropleth(data_frame=dff2,locations='id',locationmode='ISO-3',
                         color='Số ca',
-                        hover_data=['Số ca','Tử vong'],hover_name="Quốc gia",
+                        hover_data={'Số ca':True,'Tử vong':True,"id":False},hover_name="Quốc gia",
                         color_continuous_scale=px.colors.diverging.Tealrose,
                         color_continuous_midpoint=1000000,
                         range_color=[0,50000000],
