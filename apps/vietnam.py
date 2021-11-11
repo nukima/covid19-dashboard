@@ -18,7 +18,6 @@ nav = create_navbar()
 
 # -----------------
 # Get data
-today, total_data_df, today_data_df, overview_7days_df, city_data_df = get_vietnam_covid_data()
 time_series_vn = get_vietnam_covid_19_time_series()
 vietnam_vaccine_city = get_vaccine_data_vietnam_city()
 vaccine_data_vietnam = get_vaccine_data_vietnam()
@@ -37,9 +36,6 @@ vaccine_data_vietnam['MA50'] = vaccine_data_vietnam['Tổng số người đã t
 vaccine_data_vietnam['MA100'] = vaccine_data_vietnam['Tổng số người đã tiêm'].rolling(window=100).mean()
 vaccine_data_vietnam = pd.melt(vaccine_data_vietnam, id_vars=['Thời gian'], value_vars=['Tổng số người đã tiêm', 'MA50', 'MA100'], var_name='Chú thích', value_name='Số người')
 
-#horizion data
-dff = city_data_df[['name', 'death', 'cases']]
-dff = pd.melt(dff, id_vars=['name'], value_vars=['death', 'cases'], var_name='status', value_name='test')
 #-----------------
 # tab style
 tabs_styles = {

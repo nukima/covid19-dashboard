@@ -176,17 +176,14 @@ def update_barchart(continent_selected, all_rows_data, barchart_xaxis, slctd_row
         barchart.update_traces(marker_color=colors)
 
     return (barchart, )
-#datatable highlight selected_row -> piechart country
+#datatable -> piechart country
 @app.callback(
-    # [   Output('datatable-s2', 'style_data_conditional'), 
        Output('piechart-s2', 'children'),
-    # [   Input('datatable-s2', 'derived_viewport_selected_rows'),
     [   Input('datatable-s2', 'derived_virtual_data'),
         Input('datatable-s2', 'derived_virtual_selected_rows'),
     ]
 )
 def piechart_update(all_rows_data, slctd_row_indices,):
-    #piechart
     dff = pd.DataFrame(all_rows_data)
     if not slctd_row_indices:
         value = html.P("Chọn một quốc gia trên bảng")

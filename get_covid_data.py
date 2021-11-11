@@ -173,7 +173,3 @@ def get_vietnam_covid_19_time_series():
 
     return time_series_vn
 
-
-
-if __name__ == "__main__":
-    msg = 'hello'
