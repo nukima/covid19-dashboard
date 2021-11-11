@@ -128,3 +128,26 @@
 #datatable-vietnam .dt-table-container__row-0 > :nth-child(2) > table > tbody > tr {
     color: #056625;
 }
+/* mobile config */
+@media (max-width: 900px) {
+    #map_world,
+    #map_vn {
+        width: calc(100vw - 30px);
+        display:flex;
+        text-align: center;
+        flex-direction: column;
+        align-items: center;
+    }
+    #mapw {
+        height: calc(100vh - 50px);
+        width: calc(100vw - 30px);
+    }
+    #mapv {
+        height: 733px;
+        width: calc(100vw - 30px);
+    }
+    #mapv > #MVN,
+    #mapw > #MW {
+        height: calc(100vh - 50px);
+    }
+}
