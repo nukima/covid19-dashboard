@@ -1,8 +1,13 @@
+# dependences 
 import dash_bootstrap_components as dbc
 
 
 def create_navbar():
-    # Create the Navbar using Dash Bootstrap Components
+    """
+        Create the Navbar using Dash Bootstrap Components
+        @parameter: none
+        @return: element
+    """ 
     navbar = dbc.NavbarSimple(
         children=[
             dbc.DropdownMenu(

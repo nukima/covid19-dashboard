@@ -1,16 +1,17 @@
+# dependencies 
 import pandas as pd  # organize the data
 import plotly.express as px
-import dash
 from dash import dash_table
-from dash.dash_table.Format import Format, Group
+from dash.dash_table.Format import Format
 from dash import dcc  # create interactive components
 from dash import html  # access html tags
 from dash.dependencies import Input, Output
+
+
 from get_covid_data import map_world_data
-#app
-from app import app
-#navbar
-from .navbar import create_navbar
+from app import app #app
+from .navbar import create_navbar #navbar
+
 
 nav = create_navbar()
 # -----------------
@@ -21,7 +22,6 @@ dff,cases,deaths=map_world_data()
 
 #Map world layout
 layout=html.Div([
-    #Place to put the 
     nav,
     html.Div([
     html.Div(id="mapw"),
@@ -39,20 +39,16 @@ layout=html.Div([
         ])
         ])
     ], className= "totalDiv"),
-    #Place to put the table
+    #data-table
     dash_table.DataTable(
         id='datatable-world',
         columns=[
-            # {'name': i, 'id': i, 'deletable': False} for i in dff.columns
-            # # omit the id column
-            # if i != 'id' and i!="index"
             {"name":"Quốc gia","id":"Quốc gia"},
             dict(id='Số ca', name='Số ca', type='numeric', format=Format().group(True)), 
             dict(id='Tử vong', name='Tử vong', type='numeric', format=Format().group(True)), 
             {"name":"Tỉ lệ tử vong","id":"Tỉ lệ tử vong"},  
         ],
         data=dff.to_dict('records'),
-        # editable=False,
         style_data_conditional=[                
            {
                "if": {"state": "selected"},
@@ -108,25 +104,3 @@ def map_world(dff2):
     fig.update_geos(fitbounds="locations", visible=False)
     fig.update_layout(margin={"r":0,"t":0,"l":0,"b":0})
     return fig
-
-#datatable highlight selected_row
-# @app.callback(
-#     Output('datatable-world', 'style_data_conditional'),
-#     [Input('datatable-world', 'derived_viewport_selected_rows'),]
-# )
-# def highlight_selectedRow(chosen_rows):
-#     style_data_conditional=[
-#                 {
-#                     'if': {'row_index': 'odd'},
-#                     'backgroundColor': 'rgb(220, 220, 220)',
-#                 },
-#                 {
-#                     'if': {'row_index': chosen_rows},
-#                     'backgroundColor': 'rgb(220, 220, 220)'
-#                 },
-#             ]
-#     return style_data_conditional
-
-
-# -------------------------------
-    

@@ -1,26 +1,25 @@
-import pandas as pd  # organize the data
+# dependencies 
 import plotly.express as px
-import requests
-import dash
 from dash import dash_table
-from dash.dash_table.Format import Format, Group
+from dash.dash_table.Format import Format
 from dash import dcc  # create interactive components
 from dash import html  # access html tags
 from dash.dependencies import Input, Output
+
+
 from get_covid_data import map_vn_data
-#app
-from app import app
-#navbar
-from .navbar import create_navbar
+from app import app #app
+from .navbar import create_navbar #navbar
+
 
 nav = create_navbar()
-
 # -----------------
 #Handle the data
 df,nocases,cases,deaths,today,casesToday=map_vn_data()
 # -----------------
 
 
+#Map VN layout
 layout=html.Div([
     nav,
     html.Div([
@@ -45,12 +44,10 @@ layout=html.Div([
         ),
         html.Div(["(Số liệu được cập nhật ngày "+today+")"],style={"fontFamily":"italic"})
     ], className= "totalDiv"),
+    #data-table
     dash_table.DataTable(
         id='datatable-vietnam',
         columns=[
-            # {'name': i, 'id': i, 'deletable': False} for i in df.columns
-            # # omit the id column
-            # if i != 'id' and i!="index" and i not in ["treating","recovered","lat","lng"]
             dict(id='Tỉnh thành', name='Tỉnh thành'), 
             dict(id='Số ca', name='Số ca', type='numeric', format=Format().group(True)), 
             dict(id='Tử vong', name='Tử vong', type='numeric', format=Format().group(True)), 
@@ -79,7 +76,8 @@ layout=html.Div([
          style_as_list_view=True,
     )])], id = "map_vn")
 ])
-
+# -----------------
+#data table => map
 @app.callback(
     Output('mapv', 'children'),
     Input('datatable-vietnam', 'derived_virtual_selected_rows')

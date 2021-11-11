@@ -65,9 +65,9 @@
     justify-content: space-around;
     flex-wrap: wrap;
 }
-#home-content  {
+#page-content > div > :nth-child(2)  {
     opacity: 0;
-    animation: home_ani 1s forwards;
+    animation: home_ani 1.5s forwards;
 }
 
 /* style total info */

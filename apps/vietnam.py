@@ -1,37 +1,39 @@
-# import dash
-from dash import html
-from dash import dcc
-from dash import dash_table
-from dash.dependencies import Input, Output
-#plotly
-import plotly.express as px
-#pandas
-import pandas as pd
-#module data
-from get_covid_data import *
-#app
-from app import app
-#navbar
-from .navbar import create_navbar
+# dependencies 
+from dash import html, dcc, dash_table         
+from dash.dependencies import Input, Output    
+import plotly.express as px #plotly
+import pandas as pd #pandas
 
-nav = create_navbar()
+
+
+
+from get_covid_data import  get_vietnam_covid_data, get_vietnam_covid_19_time_series, get_vaccine_data_vietnam_city, get_vaccine_data_vietnam #module data
+from app import app #app
+from .navbar import create_navbar #navbar
 
 # -----------------
-# Get data
+# Local object
+# nav bar
+nav = create_navbar()
+
+# covid data
 today, total_data_df, today_data_df, overview_7days_df, city_data_df = get_vietnam_covid_data()
 time_series_vn = get_vietnam_covid_19_time_series()
 vietnam_vaccine_city = get_vaccine_data_vietnam_city()
 vaccine_data_vietnam = get_vaccine_data_vietnam()
+
 #linechart1-data
 linechart_data_1 = time_series_vn[['Ngày', 'Số ca nhiễm']]
 linechart_data_1['MA50'] = linechart_data_1['Số ca nhiễm'].rolling(window=50).mean()
 linechart_data_1['MA200'] = linechart_data_1['Số ca nhiễm'].rolling(window=200).mean()
 linechart_data_1 = pd.melt(linechart_data_1, id_vars=['Ngày'], value_vars=['Số ca nhiễm', 'MA50', 'MA200'], var_name='Chú thích', value_name='Số ca')
+
 #linechart2-data
 linechart_data_2 = time_series_vn[['Ngày', 'Tử vong']]
 linechart_data_2['MA50'] = linechart_data_2['Tử vong'].rolling(window=50).mean()
 linechart_data_2['MA200'] = linechart_data_2['Tử vong'].rolling(window=200).mean()
 linechart_data_2 = pd.melt(linechart_data_2, id_vars=['Ngày'], value_vars=['Tử vong', 'MA50', 'MA200'], var_name='Chú thích', value_name='Số ca')
+
 #linechart3-data
 vaccine_data_vietnam['MA50'] = vaccine_data_vietnam['Tổng số người đã tiêm'].rolling(window=50).mean()
 vaccine_data_vietnam['MA100'] = vaccine_data_vietnam['Tổng số người đã tiêm'].rolling(window=100).mean()
@@ -41,6 +43,7 @@ vaccine_data_vietnam = pd.melt(vaccine_data_vietnam, id_vars=['Thời gian'], va
 dff = city_data_df[['name', 'death', 'cases']]
 dff = pd.melt(dff, id_vars=['name'], value_vars=['death', 'cases'], var_name='status', value_name='test')
 #-----------------
+
 # tab style
 tabs_styles = {
     'height': '44px'
@@ -83,7 +86,7 @@ layout = html.Div([
             html.A("Nguồn: JHU CSSE COVID-19 Data", href='https://github.com/CSSEGISandData/COVID-19', target="_blank"),
         ], style=tab_style, selected_style=tab_selected_style,
         ),
-        #linechart so ca tu vong
+        #linechart death cases
         dcc.Tab(label='Tử vong', children=[
             dcc.Graph(
                 id='linechart2-s3',
