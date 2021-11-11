@@ -1,8 +1,8 @@
 # import dash
-from dash.html.Br import Br
-from dash import html
+import dash_html_components as html
 from dash import dcc
-from dash import dash_table
+import dash_table
+from dash_table.Format import Format, Group
 from dash.dependencies import Input, Output
 #plotly
 import plotly.express as px
@@ -74,19 +74,16 @@ layout = html.Div([
                      "deletable": False, "selectable": False},
                     {"name": 'Quốc gia', "id": 'location',
                      "deletable": False, "selectable": False},
-                    {"name": 'Số ca nhiễm', "id": 'total_cases',
-                     "deletable": False, "selectable": False},
-                    {"name": 'Tử vong', "id": 'total_deaths',
-                     "deletable": False, "selectable": False},
-                    {"name": 'Đã tiêm vaccine', "id": 'people_vaccinated',
-                     "deletable": False, "selectable": False},
+                    dict(id='total_cases', name='Số ca nhiễm', type='numeric', format=Format().group(True)) ,
+                    dict(id='total_deaths', name='Tử vong', type='numeric', format=Format().group(True)) ,
+                    dict(id='people_vaccinated', name='Đã tiêm vaccine', type='numeric', format=Format().group(True)) ,
                     {"name": 'Cập nhật', "id": 'last_updated_date',
                      "deletable": False, "selectable": False},
                 ],
                 editable=False,
                 filter_action="native",
                 sort_action="native",
-                sort_mode="single",
+                sort_mode="multi",
                 row_selectable="single",
                 row_deletable=False,
                 style_table={'height': '350px'},

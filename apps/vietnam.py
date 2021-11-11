@@ -1,7 +1,8 @@
 # import dash
-from dash import html
+import dash_html_components as html
 from dash import dcc
-from dash import dash_table
+import dash_table
+from dash_table.Format import Format, Group
 from dash.dependencies import Input, Output
 #plotly
 import plotly.express as px
@@ -148,12 +149,9 @@ layout = html.Div([
                 columns=[
                     {"name": 'Thành phố', "id": 'fK',
                      "deletable": False, "selectable": False},
-                    {"name": 'Dân số >= 18 tuổi', "id": 'Tổng số dân trên 18 tuổi',
-                     "deletable": False, "selectable": False},
-                    {"name": 'Đã tiêm liều 1', "id": 'Số người tiêm liều 1',
-                     "deletable": False, "selectable": False},
-                    {"name": 'Đã tiêm liều 2 ', "id": 'Số người tiêm liều 2 ',
-                     "deletable": False, "selectable": False},
+                    dict(id='Tổng số dân trên 18 tuổi', name='Dân số >= 18 tuổi', type='numeric', format=Format().group(True)) ,
+                    dict(id='Số người tiêm liều 1', name='Đã tiêm liều 1', type='numeric', format=Format().group(True)) ,
+                    dict(id='Số người tiêm liều 2 ', name='Đã tiêm liều 2 ', type='numeric', format=Format().group(True)) ,
                     {"name": 'Tỷ lệ tiêm (%)', "id": 'Tỷ lệ tiêm',
                      "deletable": False, "selectable": False},
                     {"name": 'Tỷ lệ tiêm đủ liều (%)', "id": 'Tỷ lệ tiêm đủ liều',
