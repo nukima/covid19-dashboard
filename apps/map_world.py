@@ -46,7 +46,7 @@ layout=html.Div([
             {"name":"Quốc gia","id":"Quốc gia"},
             dict(id='Số ca', name='Số ca', type='numeric', format=Format().group(True)), 
             dict(id='Tử vong', name='Tử vong', type='numeric', format=Format().group(True)), 
-            dict(id='Tỉ lệ tử vong', name='Tử vong', type='numeric',format=Format(precision=3)),     
+            dict(id='Tỉ lệ tử vong', name='Tỉ lệ tử vong', type='numeric',format=Format(precision=3)),     
         ],
         data=dff.to_dict('records'),
         style_data_conditional=[                
